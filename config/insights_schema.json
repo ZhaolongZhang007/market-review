@@ -1,0 +1,120 @@
+{
+  "note": "insights.json 的结构契约。save_insights.py 和浏览器面板共用，改这里两边同时生效。required 为必填字段；缺失或类型不符会被拒绝写入。",
+  "version": 1,
+  "root": {
+    "required": ["tradingDate", "styleVerdict", "masters", "tradingAdvice", "stockPool"],
+    "fields": {
+      "tradingDate": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "desc": "对应的行情日期，必须与 market.json 的 tradingDate 一致" },
+      "styleVerdict": {
+        "type": "object",
+        "required": ["title", "summary"],
+        "fields": {
+          "title": { "type": "string", "maxLength": 24, "desc": "当日风格一句话判定，如“小票弱于权重，价值防守占优”" },
+          "summary": { "type": "string", "maxLength": 220, "desc": "风格判定的依据，必须引用给定数据中的具体数字" },
+          "tags": { "type": "array", "items": "string", "maxItems": 4 }
+        }
+      },
+      "sectorReads": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "object",
+          "required": ["name", "reason"],
+          "fields": {
+            "name": { "type": "string", "desc": "必须来自给定的板块列表，不得杜撰" },
+            "reason": { "type": "string", "maxLength": 120 },
+            "sustainability": { "type": "string", "enum": ["高", "中", "低"] }
+          }
+        }
+      },
+      "masters": {
+        "type": "array",
+        "minItems": 6,
+        "maxItems": 18,
+        "items": {
+          "type": "object",
+          "required": ["name", "quote"],
+          "fields": {
+            "name": { "type": "string", "desc": "必须来自 config/masters.json 的名单" },
+            "quote": { "type": "string", "maxLength": 90, "desc": "以该大师口吻点评当日盘面，须落到具体数字或板块" },
+            "tags": { "type": "array", "items": "string", "maxItems": 3 },
+            "picks": { "type": "array", "items": "string", "maxItems": 3, "desc": "点名的标的，须来自给定的板块/龙头/涨停梯队" }
+          }
+        }
+      },
+      "consensus": {
+        "type": "object",
+        "fields": {
+          "agreementPct": { "type": "number", "min": 0, "max": 100, "desc": "由 masters 里被重复点名的比例算出，不得随意编造" },
+          "note": { "type": "string", "maxLength": 160 },
+          "picks": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "required": ["name"],
+              "fields": {
+                "name": { "type": "string" },
+                "code": { "type": "string" },
+                "votes": { "type": "number", "desc": "有多少位大师点到了这只" }
+              }
+            }
+          }
+        }
+      },
+      "tradingAdvice": {
+        "type": "object",
+        "required": ["summary"],
+        "fields": {
+          "summary": { "type": "string", "maxLength": 260 },
+          "shortTerm": { "type": "array", "items": "string", "maxItems": 4 },
+          "midTerm": { "type": "array", "items": "string", "maxItems": 4 },
+          "riskControl": { "type": "string", "maxLength": 200 }
+        }
+      },
+      "stockPool": {
+        "type": "array",
+        "maxItems": 15,
+        "items": {
+          "type": "object",
+          "required": ["name", "logic"],
+          "fields": {
+            "code": { "type": "string" },
+            "name": { "type": "string" },
+            "sector": { "type": "string" },
+            "action": { "type": "string", "desc": "如 回踩关注 / 分批低吸 / 观望" },
+            "horizon": { "type": "string", "enum": ["短线", "中线", "短线/中线"] },
+            "logic": { "type": "string", "maxLength": 120 },
+            "risk": { "type": "string", "maxLength": 120 }
+          }
+        }
+      },
+      "abnormalMoves": {
+        "type": "array",
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "required": ["type"],
+          "fields": {
+            "type": { "type": "string" },
+            "items": { "type": "array", "items": "string", "maxItems": 5 },
+            "note": { "type": "string", "maxLength": 120 }
+          }
+        }
+      },
+      "eventReads": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "required": ["title"],
+          "fields": {
+            "type": { "type": "string", "enum": ["政策", "事件", "公告", "海外", "产业"] },
+            "title": { "type": "string", "maxLength": 120 },
+            "impactedStocks": { "type": "array", "items": "string", "maxItems": 5 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A股复盘 | MarketReview</title>
+  <meta name="description" content="A股市场复盘网站，展示指数行情、全球市场、交易主线、新闻与策略清单。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20260717-close">
+</head>
+<body>
+  <div class="chart-line"></div>
+  <div class="grid-overlay"></div>
+  <div class="noise-overlay"></div>
+
+  <nav class="navbar">
+    <a class="nav-brand" href="#overview" aria-label="MarketReview 首页">
+      <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+      <span>MarketReview</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#overview" class="active">概览</a></li>
+      <li><a href="#masters">AI观点</a></li>
+      <li><a href="#index-style">指数风格</a></li>
+      <li><a href="#volume">成交量</a></li>
+      <li><a href="#sectors">板块资金</a></li>
+      <li><a href="#stocks">个股情绪</a></li>
+      <li><a href="#news-events">新闻事件</a></li>
+      <li><a href="#advice">交易建议</a></li>
+    </ul>
+    <div class="nav-meta">
+      <div class="market-status" id="navStatus">读取中</div>
+      <span id="navDate">--</span>
+      <button class="nav-toggle" id="navToggle" aria-label="展开导航"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <main class="main-container">
+    <div id="dataBanner" hidden></div>
+
+    <section class="hero" id="overview">
+      <div class="hero-glow"></div>
+      <h1 class="hero-slogan">洞察先机 / 把握趋势</h1>
+      <p class="hero-subtitle" id="heroSubtitle">每日深度复盘，助你洞察市场先机</p>
+      <div class="hero-actions">
+        <a href="#index-style" class="btn btn-primary"><i class="fas fa-eye"></i> 查看今日复盘</a>
+        <a href="#advice" class="btn btn-outline"><i class="fas fa-list-check"></i> 明日交易建议</a>
+      </div>
+      <div class="hero-date">
+        <i class="fas fa-calendar-alt"></i>
+        <span id="heroDate">--</span>
+        <span class="divider">|</span>
+        <span id="heroTurnover">成交 --</span>
+        <span class="divider">|</span>
+        <span id="heroUpdated">更新 --</span>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="decision">
+      <div class="section-title">
+        <span>今日市场结论：10秒读懂盘面</span>
+        <span class="title-badge">决策驾驶舱</span>
+      </div>
+      <div class="decision-layout">
+        <div class="card decision-card">
+          <div class="decision-eyebrow">今日一句话</div>
+          <h2 id="decisionHeadline">等待行情数据。</h2>
+          <p id="decisionSummary">正在生成盘面结论。</p>
+          <div class="decision-insights" id="decisionInsights"></div>
+          <div class="decision-triggers" id="decisionTriggers"></div>
+          <div class="decision-grid" id="decisionGrid"></div>
+        </div>
+        <div class="card temperature-card">
+          <div class="card-title"><i class="fas fa-temperature-half"></i> 市场情绪温度</div>
+          <div class="temperature-meter">
+            <div class="temperature-ring" id="temperatureRing">
+              <strong id="temperatureScore">--</strong>
+              <span id="temperatureLabel">读取中</span>
+            </div>
+          </div>
+          <div class="temperature-meta" id="temperatureMeta"></div>
+          <div class="temperature-brief" id="temperatureBrief"></div>
+          <div class="temperature-sources" id="temperatureSources"></div>
+        </div>
+      </div>
+      <div class="card temperature-history" id="temperatureHistory"></div>
+      <div class="card event-timeline-card" id="eventTimeline"></div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="masters">
+      <div class="section-title">
+        <span>AI大师观点：18名专家对当前A股的看法</span>
+        <span class="title-badge" id="insightsBadge">未生成</span>
+      </div>
+
+      <details class="insights-panel" id="insightsPanel">
+        <summary>
+          <i class="fas fa-wand-magic-sparkles"></i>
+          生成 / 更新洞察内容
+          <span class="insights-panel-meta" id="insightsMeta"></span>
+        </summary>
+        <div class="insights-panel-body">
+          <ol class="insights-steps">
+            <li>
+              点「复制提示词」，把当日盘面数据和角色设定复制到剪贴板。
+              <button type="button" class="insights-btn primary" id="copyPromptBtn">
+                <i class="fas fa-copy"></i> 复制提示词
+              </button>
+              <button type="button" class="insights-btn" id="viewPromptBtn">
+                <i class="fas fa-eye"></i> 预览
+              </button>
+              <span class="insights-status" id="copyStatus"></span>
+            </li>
+            <li>粘贴进任意 chat（Claude / ChatGPT 均可），等它输出 JSON。</li>
+            <li>
+              把模型回复整段粘到下面，点「解析并应用」。围栏和多余的解释文字会自动剥掉。
+              <textarea id="insightsInput" rows="6" placeholder="把 chat 的回复整段粘贴到这里，不用手动删除 ```json 或前后的说明文字……"></textarea>
+              <div class="insights-actions">
+                <button type="button" class="insights-btn primary" id="applyInsightsBtn">
+                  <i class="fas fa-check"></i> 解析并应用
+                </button>
+                <button type="button" class="insights-btn" id="downloadInsightsBtn">
+                  <i class="fas fa-download"></i> 下载 insights.json
+                </button>
+                <button type="button" class="insights-btn danger" id="clearInsightsBtn">
+                  <i class="fas fa-trash"></i> 清除
+                </button>
+              </div>
+              <div class="insights-result" id="insightsResult"></div>
+            </li>
+          </ol>
+          <p class="insights-note">
+            浏览器里应用的结果保存在本机 localStorage，只对你自己可见。
+            想让它成为项目的一部分（供他人打开即见），点「下载 insights.json」并放到项目根目录，
+            或改用命令行：<code>python3 make_prompt.py</code> → 贴进 chat → <code>python3 save_insights.py</code>。
+          </p>
+          <pre class="insights-prompt" id="promptPreview" hidden></pre>
+        </div>
+      </details>
+
+      <div class="card consensus-card">
+        <div class="card-title"><i class="fas fa-users-viewfinder"></i> AI投委会共识股票池</div>
+        <div class="consensus-grid" id="consensusGrid"></div>
+      </div>
+      <div class="master-grid dense" id="masterGrid"></div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="index-style">
+      <div class="section-title">
+        <span>1、观察指数表现与市场风格判定</span>
+        <span class="title-badge">风格</span>
+      </div>
+      <div class="index-grid" id="indicesGrid"></div>
+      <div class="grid-2 section-stack">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-scale-balanced"></i> 市场风格判定</div>
+          <div class="style-matrix" id="styleMatrix"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-crosshairs"></i> 风格结论</div>
+          <div class="highlight-box compact">
+            <span><i class="fas fa-lightbulb"></i> 判定：</span>
+            <p id="styleSummary">等待最新行情数据。</p>
+          </div>
+          <div class="mini-list" id="styleSignals"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="volume">
+      <div class="section-title">
+        <span>2、分析成交量变化</span>
+        <span class="title-badge">量能</span>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-chart-column"></i> 成交额变化</div>
+          <div class="volume-kpis" id="volumeKpis"></div>
+          <div class="volume-bars" id="volumeBars"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-magnifying-glass-chart"></i> 量能解读</div>
+          <p class="analysis-text" id="volumeSummary">等待成交量数据。</p>
+          <ul class="checklist compact-list" id="volumeChecklist"></ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="sectors">
+      <div class="section-title">
+        <span>3、热点板块、涨幅榜、资金流向与估值锚定</span>
+        <span class="title-badge">强度排序</span>
+      </div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-ranking-star"></i> 主线强度榜：更适合交易的排序</div>
+        <div class="mainline-board" id="mainlineBoard"></div>
+      </div>
+      <div class="card section-stack market-heatmap-card">
+        <div class="card-title"><i class="fas fa-table-cells-large"></i> 全球热点板块热力图：美股 / A股 / 港股</div>
+        <div class="market-heatmap" id="marketHeatmap"></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-fire"></i> 热点板块 / 涨幅榜分析</div>
+          <div class="sector-list" id="hotSectors"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-money-bill-trend-up"></i> 资金流向追踪</div>
+          <div class="flow-list" id="fundFlows"></div>
+        </div>
+      </div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-anchor"></i> 估值锚定：动态 PE/PB 分位数与行业横向对比</div>
+        <div class="valuation-grid" id="valuationGrid"></div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="stocks">
+      <div class="section-title">
+        <span>4、个股分析、涨跌家数比、市场情绪与异常波动</span>
+        <span class="title-badge">情绪</span>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-arrow-trend-up"></i> 个股分析</div>
+          <div class="stock-analysis-list" id="stockAnalysis"></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-temperature-half"></i> 市场情绪指标</div>
+          <div class="sentiment-grid" id="sentimentGrid"></div>
+          <p class="analysis-text" id="sentimentSummary"></p>
+        </div>
+      </div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-triangle-exclamation"></i> 异常波动识别</div>
+        <div class="abnormal-grid" id="abnormalMoves"></div>
+      </div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-dragon"></i> 龙虎榜数据</div>
+        <div class="lhb-list" id="lhbList"></div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="news-events">
+      <div class="section-title">
+        <span>5、热点新闻、政策、事件、上市公司公告</span>
+        <span class="title-badge">事件驱动</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="section-subtitle">热点新闻</div>
+          <div class="news-grid" id="newsGrid"></div>
+        </div>
+        <div>
+          <div class="section-subtitle">政策 / 事件 / 公告</div>
+          <div class="event-list" id="eventList"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section" id="advice">
+      <div class="section-title">
+        <span>6、明天股票交易建议：趋势强势股策略</span>
+        <span class="title-badge">1-3日 / 1-3月</span>
+      </div>
+      <div class="grid-2" id="adviceGrid"></div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-map-signs"></i> 明日三种交易剧本</div>
+        <div class="scenario-grid" id="scenarioGrid"></div>
+      </div>
+      <div class="card section-stack">
+        <div class="card-title"><i class="fas fa-basket-shopping"></i> 明日趋势强势股股票池（10-15个）</div>
+        <div class="stock-pool-grid" id="stockPoolGrid"></div>
+      </div>
+      <div class="grid-2 section-stack">
+        <div class="card" id="strategyPanel"></div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-clipboard-check"></i> 趋势强势股交易清单</div>
+          <ul class="checklist" id="checklist"></ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section">
+      <div class="section-title">
+        <span>辅助观察：全球市场联动</span>
+        <span class="title-badge">外围</span>
+      </div>
+      <div class="global-grid" id="globalGrid"></div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="section">
+      <div class="section-title">
+        <span>风险警示</span>
+        <span class="title-badge">必读</span>
+      </div>
+      <div class="risk-grid" id="riskGrid"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>MarketReview · A股市场复盘</p>
+    <p>本页面仅供参考，不构成投资建议。股市有风险，投资需谨慎。</p>
+  </footer>
+
+  <script src="app.js?v=20260717-close"></script>
+</body>
+</html>
