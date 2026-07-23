@@ -11,6 +11,7 @@ worse than no file, because the dashboard would render it as real analysis.
   cat reply.txt | python3 save_insights.py -
 """
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime
@@ -40,28 +41,38 @@ def extract_json(text):
     if not text or not text.strip():
         raise ValueError("输入为空")
 
-    # Prefer a fenced block if present — it's the model's own delimiter.
-    fence = text.find("```")
-    if fence != -1:
-        rest = text[fence + 3:]
-        newline = rest.find("\n")
-        if newline != -1:
-            body = rest[newline + 1:]
-            close = body.find("```")
-            if close != -1:
-                candidate = body[:close].strip()
-                if candidate.startswith("{"):
-                    return json.loads(candidate)
+    # Search fenced-block bodies first (the model's own delimiter), then the raw
+    # text. In each region, try EVERY balanced {...} object and return the first
+    # that parses to a dict. This tolerates: a stray '{' in preamble prose,
+    # trailing commentary inside a fence, and multiple ``` blocks.
+    regions = [body for body in re.findall(r"```[^\n]*\n(.*?)```", text, re.S)]
+    regions.append(text)
 
-    start = text.find("{")
-    if start == -1:
+    saw_object = False
+    for region in regions:
+        for candidate in _iter_balanced_objects(region):
+            saw_object = True
+            try:
+                parsed = json.loads(candidate)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(parsed, dict):
+                return parsed
+
+    if text.find("{") == -1:
         raise ValueError("没找到 JSON 对象（输入里没有 '{'）")
+    if not saw_object:
+        raise ValueError("JSON 花括号不配平，回复可能被截断了——让模型重新输出完整 JSON")
+    raise ValueError("找到了花括号但都无法解析为合法 JSON 对象——让模型只输出纯 JSON")
 
+
+def _iter_balanced_objects(text):
+    """Yield every top-level balanced {...} substring, ignoring braces in strings."""
     depth = 0
+    start = None
     in_string = False
     escaped = False
-    for index in range(start, len(text)):
-        char = text[index]
+    for index, char in enumerate(text):
         if in_string:
             if escaped:
                 escaped = False
@@ -73,12 +84,15 @@ def extract_json(text):
         if char == '"':
             in_string = True
         elif char == "{":
+            if depth == 0:
+                start = index
             depth += 1
         elif char == "}":
-            depth -= 1
-            if depth == 0:
-                return json.loads(text[start:index + 1])
-    raise ValueError("JSON 花括号不配平，回复可能被截断了——让模型重新输出完整 JSON")
+            if depth > 0:
+                depth -= 1
+                if depth == 0 and start is not None:
+                    yield text[start:index + 1]
+                    start = None
 
 
 class Validator:
@@ -106,10 +120,25 @@ class Validator:
 
     def _field(self, path, value, spec):
         expected = spec.get("type")
-        if expected == "string" and not isinstance(value, str):
-            return self.fail(path, f"应为字符串，实际是 {type(value).__name__}")
-        if expected == "number" and not isinstance(value, (int, float)):
-            return self.fail(path, f"应为数字，实际是 {type(value).__name__}")
+        if expected == "string":
+            if not isinstance(value, str):
+                return self.fail(path, f"应为字符串，实际是 {type(value).__name__}")
+            max_len = spec.get("maxLength")
+            if max_len and len(value) > max_len:
+                self.fail(path, f"长度超限：最多 {max_len} 字，实际 {len(value)} 字")
+            min_len = spec.get("minLength")
+            if min_len and len(value) < min_len:
+                self.fail(path, f"长度不足：至少 {min_len} 字")
+            pattern = spec.get("pattern")
+            if pattern and not re.match(pattern, value):
+                self.fail(path, f"格式不符（须匹配 {pattern}），实际 {value!r}")
+        if expected == "number":
+            if not isinstance(value, (int, float)) or isinstance(value, bool):
+                return self.fail(path, f"应为数字，实际是 {type(value).__name__}")
+            if spec.get("min") is not None and value < spec["min"]:
+                self.fail(path, f"不得小于 {spec['min']}，实际 {value}")
+            if spec.get("max") is not None and value > spec["max"]:
+                self.fail(path, f"不得大于 {spec['max']}，实际 {value}")
         if expected == "array":
             if not isinstance(value, list):
                 return self.fail(path, f"应为数组，实际是 {type(value).__name__}")
@@ -121,6 +150,12 @@ class Validator:
             if isinstance(item_spec, dict):
                 for i, item in enumerate(value):
                     self._object(f"{path}[{i}]", item, item_spec)
+            elif item_spec == "string":
+                # 元素声明为 string（tags/picks/shortTerm…）时逐个校验类型，
+                # 否则 [null, 123, {...}] 会蒙混过关，前端渲染出 null。
+                for i, item in enumerate(value):
+                    if not isinstance(item, str):
+                        self.fail(f"{path}[{i}]", f"数组元素应为字符串，实际是 {type(item).__name__}")
         if expected == "object":
             self._object(path, value, spec)
         if spec.get("enum") and value not in spec["enum"]:

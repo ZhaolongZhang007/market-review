@@ -5,6 +5,7 @@ Kept in its own module so akshare stays an optional dependency: if it isn't
 installed the caller gets a "missing" result instead of a crash, and the rest
 of update_data.py still runs on the stdlib-only path.
 """
+import re
 import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -88,7 +89,9 @@ def fetch_limit_ecosystem(date_str=None):
     if zt is not None and zb is not None:
         sealed, broken = len(zt), len(zb)
         total = sealed + broken
-        if total:
+        # 只有真有封住的涨停(sealed>0)时算炸板率才有意义；否则 broken/broken=100%
+        # 是无意义的（盘前涨停池空、炸板池非空会得到 100%）。
+        if sealed > 0 and total:
             rate = broken / total * 100
             result["breakRate"] = f"{rate:.1f}%"
             result["breakRateValue"] = round(rate, 1)
@@ -216,16 +219,36 @@ def _drop_delisting(zt_df):
         return zt_df
 
 
+def _to_board_int(value):
+    """连板数 → int. Handles numbers, "N板", and "首板"(=1).
+
+    Text values used to raise and get silently dropped, which erased 首板 stocks
+    from the ladder and skewed 最高板/2板以上 downward.
+    """
+    if value is None:
+        return None
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        pass
+    text = str(value).strip()
+    if text in ("首板", "首", "1板"):
+        return 1
+    match = re.match(r"^(\d+)\s*板", text)
+    if match:
+        return int(match.group(1))
+    return None
+
+
 def _board_counts(zt_df):
     """连板数 column is usually int-like but occasionally arrives as text."""
     if "连板数" not in zt_df.columns:
         return []
     counts = []
     for value in zt_df["连板数"].tolist():
-        try:
-            counts.append(int(float(value)))
-        except (TypeError, ValueError):
-            continue
+        board = _to_board_int(value)
+        if board is not None:
+            counts.append(board)
     return counts
 
 
@@ -242,23 +265,18 @@ def _leaders(zt_df, limit=6):
     """Highest 连板 stocks, i.e. the 龙头梯队 the dashboard talks about."""
     if not {"名称", "连板数"}.issubset(zt_df.columns):
         return []
-    try:
-        ranked = zt_df.sort_values("连板数", ascending=False).head(limit)
-    except Exception:
-        return []
-    out = []
-    for _, row in ranked.iterrows():
-        try:
-            board = int(float(row.get("连板数")))
-        except (TypeError, ValueError):
-            board = None
-        out.append({
+    rows = []
+    for _, row in zt_df.iterrows():
+        rows.append({
             "name": str(row.get("名称", "")),
             "code": str(row.get("代码", "")),
-            "board": board,
+            "board": _to_board_int(row.get("连板数")),
             "sector": str(row.get("所属行业", "")),
         })
-    return out
+    # Sort numerically — the raw column may be text ("首板"), so a pandas
+    # sort_values would order lexically and mis-rank the 龙头梯队.
+    rows.sort(key=lambda r: (r["board"] if r["board"] is not None else -1), reverse=True)
+    return rows[:limit]
 
 
 if __name__ == "__main__":

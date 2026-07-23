@@ -789,6 +789,7 @@ a {
   color: var(--text-dim);
   font-size: 0.64rem;
   writing-mode: vertical-rl;
+  white-space: nowrap;
 }
 
 .temperature-day b {

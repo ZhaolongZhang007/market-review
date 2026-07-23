@@ -1,284 +1,12 @@
 {
-  "updatedAt": "2026-07-22T09:13:14.813105+08:00",
+  "updatedAt": "2026-07-23T22:11:44.036402+08:00",
   "items": [
     {
-      "title": "中国外贸增势强劲、走势稳健（年中经济观察）",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-22/10663997.shtml",
+      "title": "美方给中国AI“泼脏水”终将徒劳丨真相",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665290.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 22 Jul 2026 09:01:26 +0800",
-      "publishedAtText": "07-22 09:01",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "我国将建设国家级零碳工厂、零碳算力设施",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-22/10663986.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 22 Jul 2026 08:46:57 +0800",
-      "publishedAtText": "07-22 08:46",
-      "impactTags": [
-        "算力"
-      ],
-      "impactedStocks": [
-        "工业富联",
-        "中际旭创",
-        "新易盛"
-      ],
-      "impactNote": "可能影响：工业富联、中际旭创、新易盛"
-    },
-    {
-      "title": "林草硬核装备走出实验室 看科技如何“点绿成金”",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-22/10663983.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 22 Jul 2026 08:22:01 +0800",
-      "publishedAtText": "07-22 08:22",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "又一万亿级蓝海！就在你家门口→",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-22/10663954.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 22 Jul 2026 07:14:07 +0800",
-      "publishedAtText": "07-22 07:14",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "2026年《财富》中国500强排行榜：国家电网、中石油和中石化位列前三",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663938.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 23:18:43 +0800",
-      "publishedAtText": "07-21 23:18",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "（活力中国调研行）从“测不准”到立标准，一只灵巧手背后的产业跃迁",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663931.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 22:41:13 +0800",
-      "publishedAtText": "07-21 22:41",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "奥精医疗董事长职位之争：83岁岳母胜出，女儿女婿落败",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663930.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 22:20:32 +0800",
-      "publishedAtText": "07-21 22:20",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "多措并举鼓信心 A股上演反攻行情",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663929.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 22:16:03 +0800",
-      "publishedAtText": "07-21 22:16",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "国家能源局：2025年我国油气产量当量达到4.2亿吨",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663922.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 22:16:01 +0800",
-      "publishedAtText": "07-21 22:16",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "（活力中国调研行）无锡药企深耕用户需求“领跑”皮肤健康赛道",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663925.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 22:09:25 +0800",
-      "publishedAtText": "07-21 22:09",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "中国证监会：增强市场内在稳定性",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663921.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:58:50 +0800",
-      "publishedAtText": "07-21 21:58",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "南航第十二架C919国产大飞机正式入列",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663899.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:58:50 +0800",
-      "publishedAtText": "07-21 21:58",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "世界人工智能开源大赛在杭州启动",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663914.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:49:49 +0800",
-      "publishedAtText": "07-21 21:49",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "上半年江西供港澳活猪出口14.5万头",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663886.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:40:19 +0800",
-      "publishedAtText": "07-21 21:40",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "中国自主研制高端船舶减摇装置连获海外新订单",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663885.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:40:07 +0800",
-      "publishedAtText": "07-21 21:40",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "北京三中院发布债权人撤销权纠纷案典型案例 防范恶意“逃废债”",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663912.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:38:45 +0800",
-      "publishedAtText": "07-21 21:38",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "今年上半年广东韶关数据中心用电量同比增409.10%",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663877.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:38:31 +0800",
-      "publishedAtText": "07-21 21:38",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "AI开源重塑产业生态 海内外专家共探智能时代开放新价值",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663853.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:33:55 +0800",
-      "publishedAtText": "07-21 21:33",
+      "publishedAt": "Thu, 23 Jul 2026 22:00:52 +0800",
+      "publishedAtText": "07-23 22:00",
       "impactTags": [
         "AI"
       ],
@@ -291,11 +19,11 @@
       "impactNote": "可能影响：工业富联、中际旭创、新易盛、寒武纪"
     },
     {
-      "title": "西安网评：长安再出发，千年古都用数据流作答全球互联互通",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663901.shtml",
+      "title": "乘旅游专列，遇见草原那达慕",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665309.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:19:52 +0800",
-      "publishedAtText": "07-21 21:19",
+      "publishedAt": "Thu, 23 Jul 2026 21:55:51 +0800",
+      "publishedAtText": "07-23 21:55",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -307,11 +35,285 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "湖南出台“向县放权”实施方案 提升政务服务效能",
-      "url": "https://www.chinanews.com.cn/cj/2026/07-21/10663845.shtml",
+      "title": "（活力中国调研行）上游芯片攻坚、下游装备出海，这束光正创造未来",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665262.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 21 Jul 2026 21:18:06 +0800",
-      "publishedAtText": "07-21 21:18",
+      "publishedAt": "Thu, 23 Jul 2026 21:48:18 +0800",
+      "publishedAtText": "07-23 21:48",
+      "impactTags": [
+        "芯片"
+      ],
+      "impactedStocks": [
+        "北方华创",
+        "中芯国际",
+        "寒武纪"
+      ],
+      "impactNote": "可能影响：北方华创、中芯国际、寒武纪"
+    },
+    {
+      "title": "中国AI为全球网络安全架桥铺路",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665280.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 21:13:51 +0800",
+      "publishedAtText": "07-23 21:13",
+      "impactTags": [
+        "AI"
+      ],
+      "impactedStocks": [
+        "工业富联",
+        "中际旭创",
+        "新易盛",
+        "寒武纪"
+      ],
+      "impactNote": "可能影响：工业富联、中际旭创、新易盛、寒武纪"
+    },
+    {
+      "title": "四川德阳：“十五五”紧扣三大定位 经济总量瞄准5000亿元",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665246.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 21:07:04 +0800",
+      "publishedAtText": "07-23 21:07",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "中国央行连续3个月加量续作中期借贷便利",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665242.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 21:06:18 +0800",
+      "publishedAtText": "07-23 21:06",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "亚洲开发银行技术援助项目在衡水启动：打造国际湿地保护样板",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665239.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 20:58:41 +0800",
+      "publishedAtText": "07-23 20:58",
+      "impactTags": [
+        "银行"
+      ],
+      "impactedStocks": [
+        "招商银行",
+        "工商银行",
+        "农业银行"
+      ],
+      "impactNote": "可能影响：招商银行、工商银行、农业银行"
+    },
+    {
+      "title": "新疆喀什甜瓜首次直供香港",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665220.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 20:27:38 +0800",
+      "publishedAtText": "07-23 20:27",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "中国证监会召开党的建设暨监管工作座谈会",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665233.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 20:21:23 +0800",
+      "publishedAtText": "07-23 20:21",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "上海欲“十五五”加快建设“亚洲演艺之都” 力争年均演出6.5万场",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665219.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 20:19:43 +0800",
+      "publishedAtText": "07-23 20:19",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "整治信用评价设招投标区域壁垒 市场监管总局公布专项行动成果",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665222.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 20:18:07 +0800",
+      "publishedAtText": "07-23 20:18",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "2026年上半年 贵州地区生产总值同比增长4.0%",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665203.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 20:03:02 +0800",
+      "publishedAtText": "07-23 20:03",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "不靠海不沿边 内陆甘肃跃升外贸新高地",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665201.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:58:57 +0800",
+      "publishedAtText": "07-23 19:58",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "杭州上半年GDP超1.2万亿 同比增长5.3%",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665189.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:58:01 +0800",
+      "publishedAtText": "07-23 19:58",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "上半年湖北综保区进出口总值逾737亿元",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665185.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:55:33 +0800",
+      "publishedAtText": "07-23 19:55",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "聚焦AI赋能淬炼专业本领  第六届西部HR能力大赛决赛举行",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665184.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:53:49 +0800",
+      "publishedAtText": "07-23 19:53",
+      "impactTags": [
+        "AI"
+      ],
+      "impactedStocks": [
+        "工业富联",
+        "中际旭创",
+        "新易盛",
+        "寒武纪"
+      ],
+      "impactNote": "可能影响：工业富联、中际旭创、新易盛、寒武纪"
+    },
+    {
+      "title": "报告称上半年中国住宿业消费市场“峰谷交替”特征明显",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665174.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:47:41 +0800",
+      "publishedAtText": "07-23 19:47",
+      "impactTags": [
+        "消费"
+      ],
+      "impactedStocks": [
+        "贵州茅台",
+        "五粮液",
+        "中国中免"
+      ],
+      "impactNote": "可能影响：贵州茅台、五粮液、中国中免"
+    },
+    {
+      "title": "“疆电入渝”工程累计外送电量突破300亿千瓦时",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665171.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:46:25 +0800",
+      "publishedAtText": "07-23 19:46",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "中国商务部：上半年办理退税境外旅客人数同比增约四倍",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665158.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:34:58 +0800",
+      "publishedAtText": "07-23 19:34",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "因保险资金运用不规范被罚60万，太平资产回应",
+      "url": "https://www.chinanews.com.cn/cj/2026/07-23/10665153.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 23 Jul 2026 19:34:00 +0800",
+      "publishedAtText": "07-23 19:34",
       "impactTags": [
         "全A风险偏好"
       ],

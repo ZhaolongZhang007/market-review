@@ -510,6 +510,19 @@ def fetch_eastmoney_quote(secid):
     }
 
 
+def is_valid_price(value):
+    """A real index/stock price is a positive number.
+
+    Pre-open (and some soft failures) return 0 or None; accepting those as a
+    live quote produces the -100% garbage the dashboard showed. Treat anything
+    non-positive or unparseable as "no quote" so the caller falls back.
+    """
+    try:
+        return value is not None and float(value) > 0
+    except (TypeError, ValueError):
+        return False
+
+
 def append_live_point(item):
     """Make the sparkline end on the number printed on the card.
 
@@ -518,12 +531,10 @@ def append_live_point(item):
     """
     sparkline = item.get("sparkline")
     value = item.get("value")
-    if not sparkline or value in (None, ""):
+    # Non-positive value = no real quote; appending it would drop the curve to 0.
+    if not sparkline or not is_valid_price(value):
         return
-    try:
-        value = float(value)
-    except (TypeError, ValueError):
-        return
+    value = float(value)
     if abs(sparkline[-1] - value) > 1e-6:
         sparkline.append(round(value, 4))
     item["sparkline"] = sparkline[-33:]
@@ -535,6 +546,7 @@ def fetch_group(symbols, previous_items, section="indices"):
     today_str = now.strftime("%Y-%m-%d")
     output = []
     stale_names = []
+    empty_names = []
     for spec in symbols:
         if len(spec) == 2:
             name, yahoo_symbol = spec
@@ -546,8 +558,16 @@ def fetch_group(symbols, previous_items, section="indices"):
         current = False   # and those numbers describe today's session
         if source == "eastmoney" and secid:
             try:
-                item.update(fetch_eastmoney_quote(secid))
-                fetched = current = True
+                quote = fetch_eastmoney_quote(secid)
+                # Eastmoney's quote endpoint carries no trade-date, so freshness
+                # can't be verified here — but a non-positive price is always
+                # garbage (pre-open f43=0), so reject it and fall through.
+                if is_valid_price(quote.get("value")):
+                    item.update(quote)
+                    fetched = current = True
+                else:
+                    print(f"warning: eastmoney returned invalid price for {name}: "
+                          f"{quote.get('value')}", file=sys.stderr)
             except Exception as exc:
                 print(f"warning: eastmoney failed for {name}: {exc}", file=sys.stderr)
         sina_code = SINA_INDEX_CODES.get(name)
@@ -561,34 +581,40 @@ def fetch_group(symbols, previous_items, section="indices"):
         if not fetched and sina_code:
             try:
                 quote = fetch_sina_index(sina_code)
+                if not is_valid_price(quote.get("value")):
+                    raise RuntimeError(f"invalid price {quote.get('value')}")
                 item.update(quote)
                 fetched = True
                 bar_date = quote.get("barDate")
-                if bar_date and bar_date != today_str:
-                    item["stale"] = True
-                    item["staleFrom"] = bar_date
-                    item["staleReason"] = f"新浪数据停留在 {bar_date}"
-                    stale_names.append(name)
-                else:
+                # Only claim "today" when the trade-date confirms it; a missing
+                # or older date means we can't verify freshness → mark stale.
+                if bar_date == today_str:
                     current = True
+                else:
+                    item["stale"] = True
+                    item["staleFrom"] = bar_date or "日期未知"
+                    item["staleReason"] = f"新浪数据日期 {bar_date or '缺失'}，非今日"
+                    stale_names.append(name)
             except Exception as exc:
                 print(f"warning: sina failed for {name}: {exc}", file=sys.stderr)
         if not fetched and yahoo_symbol:
             try:
                 quote = fetch_yahoo_chart(yahoo_symbol)
+                if not is_valid_price(quote.get("value")):
+                    raise RuntimeError(f"invalid price {quote.get('value')}")
                 item.update(quote)
                 fetched = True
                 bar_date = quote.get("barDate")
                 # Yahoo often serves an older single bar for the CN indices, so
                 # its change% can span several sessions. Keep the value, but do
                 # not let it pass as today's move.
-                if bar_date and bar_date != today_str:
-                    item["stale"] = True
-                    item["staleFrom"] = bar_date
-                    item["staleReason"] = f"Yahoo 数据停留在 {bar_date}，涨幅非单日口径"
-                    stale_names.append(name)
-                else:
+                if bar_date == today_str:
                     current = True
+                else:
+                    item["stale"] = True
+                    item["staleFrom"] = bar_date or "日期未知"
+                    item["staleReason"] = f"Yahoo 数据日期 {bar_date or '缺失'}，涨幅非单日口径"
+                    stale_names.append(name)
             except Exception as exc:
                 print(f"warning: yahoo failed for {name}: {exc}", file=sys.stderr)
         if not fetched:
@@ -597,11 +623,14 @@ def fetch_group(symbols, previous_items, section="indices"):
             carried = dict(previous_by_name.get(name, {}))
             carried.pop("stale", None)
             item.update(carried)
-            if item.get("valueText") not in (None, "--"):
+            if is_valid_price(item.get("value")) or item.get("valueText") not in (None, "--"):
                 item["stale"] = True
                 item["staleFrom"] = carried.get("asOf") or "上一次成功抓取"
                 item["staleReason"] = "本次抓取失败，沿用上次数据"
                 stale_names.append(name)
+            else:
+                # No live fetch and no usable previous value → genuinely empty.
+                empty_names.append(name)
         elif current:
             item["stale"] = False
             item["asOf"] = now.strftime("%Y-%m-%d %H:%M")
@@ -612,12 +641,14 @@ def fetch_group(symbols, previous_items, section="indices"):
         item.setdefault("sparkline", [])
         output.append(item)
 
-    if not stale_names:
-        mark(section, "live", source="eastmoney/yahoo")
-    elif len(stale_names) == len(output):
-        mark(section, "stale", detail="全部沿用上次数据：" + "、".join(stale_names), source="previous")
+    unfresh = stale_names + empty_names
+    if not unfresh:
+        mark(section, "live", source="eastmoney/sina/yahoo")
+    elif len(unfresh) == len(output):
+        state = "missing" if empty_names and not stale_names else "stale"
+        mark(section, state, detail="未取得最新数据：" + "、".join(unfresh), source="previous")
     else:
-        mark(section, "partial", detail="沿用上次数据：" + "、".join(stale_names), source="mixed")
+        mark(section, "partial", detail="未取得最新数据：" + "、".join(unfresh), source="mixed")
     return output
 
 
@@ -634,6 +665,10 @@ def fetch_volume_analysis(existing):
             mark("volumeAnalysis", "stale", detail="K线返回空", source="previous")
             return previous
         today = rows[-1]["amount"]
+        # 盘前当日 K 线成交额为 0，会算出 -100% 的假变化，视为无效走兜底。
+        if not today or today <= 0:
+            mark("volumeAnalysis", "stale", detail="当日成交额为0（可能盘前）", source="previous")
+            return previous
         prev = rows[-2]["amount"] if len(rows) > 1 else None
         change = ((today - prev) / prev * 100) if prev else None
         max_amount = max(row["amount"] for row in rows) or 1
@@ -657,8 +692,11 @@ def fetch_volume_analysis(existing):
         print(f"warning: using previous volume data: {exc}", file=sys.stderr)
         try:
             snapshot = fetch_sina_market_snapshot()
-            mark("volumeAnalysis", "live", detail="eastmoney 失败，改用新浪快照", source="新浪全A快照")
             today = snapshot["amount"]
+            # 盘前成交额为 0，新浪快照也是 0，不能标 live、更不能算 -100%。
+            if not today or today <= 0:
+                raise RuntimeError("sina turnover is 0 (likely pre-open)")
+            mark("volumeAnalysis", "live", detail="eastmoney 失败，改用新浪快照", source="新浪全A快照")
             prev_text = prefer_recent(previous.get("today"), DEFAULT_VOLUME_ANALYSIS["previous"])
             previous_amount = None
             if "万亿" in str(prev_text):
@@ -819,6 +857,100 @@ def strip_stale_commentary(items):
     return cleaned
 
 
+def _num(value):
+    """Parse a number out of "6.2%" / "1923" / 3.5 / None."""
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    text = str(value).strip().replace("%", "").replace(",", "")
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
+def compute_temperature(sentiment, indices):
+    """情绪温度 0–100. Faithful port of getTemperature() in app.js — keep the two
+    in sync. Only positive, sane index moves feed avgIndex (mirrors sanitizeIndices).
+    """
+    up = _num(sentiment.get("upCount"))
+    down = _num(sentiment.get("downCount"))
+    limit_up = _num(sentiment.get("limitUp"))
+    limit_down = _num(sentiment.get("limitDown"))
+    break_rate = _num(sentiment.get("breakRate"))
+
+    wanted = {"上证指数", "沪深300", "创业板50", "科创50"}
+    moves = []
+    for item in indices or []:
+        if item.get("name") not in wanted:
+            continue
+        change = _num(item.get("changePercent"))
+        value = _num(item.get("value"))
+        if change is None or abs(change) >= 30:
+            continue
+        if value is not None and value <= 0:
+            continue
+        moves.append(change)
+    avg_index = sum(moves) / len(moves) if moves else None
+
+    score = 50.0
+    if up is not None and down is not None and up + down > 0:
+        score += ((up / (up + down)) - 0.5) * 34
+    if limit_up is not None:
+        score += min(limit_up, 90) * 0.16
+    if limit_down is not None:
+        score -= min(limit_down, 60) * 0.28
+    if break_rate is not None:
+        score -= min(break_rate, 80) * 0.12
+    if avg_index is not None:
+        score += avg_index * 5
+    return int(round(max(8, min(92, score))))
+
+
+def temperature_label(value):
+    if value >= 78:
+        return "亢奋"
+    if value >= 64:
+        return "活跃"
+    if value >= 48:
+        return "修复"
+    if value >= 32:
+        return "谨慎"
+    return "冰点"
+
+
+def update_temperature_history(existing, sentiment, indices, now, is_fresh):
+    """Append today's real temperature to a rolling 24-session history.
+
+    Replaces the hardcoded fake month (which was frozen at 07-17=8). Only records
+    when breadth is genuinely fresh, so a pre-open/stale run never writes a point.
+    Legacy label-only entries (the seeded fake data) are dropped — better a short
+    real history than a long fabricated one.
+    """
+    prior = (existing.get("sentiment") or {}).get("history") or []
+    # Keep only points this code wrote (they carry a real `date`), discarding the
+    # original fabricated series.
+    history = [h for h in prior if isinstance(h, dict) and h.get("date")]
+
+    if not is_fresh:
+        return history[-24:]
+
+    value = compute_temperature(sentiment, indices)
+    today = now.strftime("%Y-%m-%d")
+    point = {
+        "date": today,
+        "label": now.strftime("%m-%d"),
+        "value": value,
+        "tag": temperature_label(value),
+    }
+    if history and history[-1].get("date") == today:
+        history[-1] = point  # same-day re-run overwrites
+    else:
+        history.append(point)
+    return history[-24:]
+
+
 def apply_limit_ecosystem(sentiment, now):
     """Overlay 涨停/跌停/连板/炸板率 from the eastmoney 股池 via akshare.
 
@@ -837,6 +969,14 @@ def apply_limit_ecosystem(sentiment, now):
         mark("limitEcosystem", "missing" if state == "missing" else "stale",
              detail=data.get("detail", ""), source="akshare")
         sentiment.setdefault("limitCaliber", "近似（涨跌幅≥9.8%）")
+        return sentiment
+
+    # 盘前涨停股池尚未成形：limitUp=0 且无连板数据。此时若用 0 覆盖，会和沿用自
+    # 上一交易日的"最高4板"文本自相矛盾。索性整块保持沿用（sentiment 已是 previous），
+    # 只标 stale，让涨停/跌停/连板/炸板率来自同一份旧快照，内部自洽。
+    if not data.get("limitUp") and not data.get("boardLadder"):
+        mark("limitEcosystem", "stale", detail="涨停池为空（可能盘前），沿用上次", source="previous")
+        sentiment.setdefault("limitCaliber", "东方财富涨停股池口径")
         return sentiment
 
     merged = dict(sentiment)
@@ -881,6 +1021,10 @@ def fetch_market_breadth(existing):
             raise RuntimeError(f"insufficient breadth sample: {len(changes)}")
         up = sum(1 for value in changes if value > 0)
         down = sum(1 for value in changes if value < 0)
+        # 盘前所有 f3 都是 0：样本量够但 up、down 全是 0，是垃圾而非"全平盘"。
+        # A 股正常交易日不可能上涨+下跌为 0，据此判定数据无效、走兜底。
+        if up + down == 0:
+            raise RuntimeError("breadth all-flat (likely pre-open)")
         # 近似口径：|涨跌幅| >= 9.8% 会漏掉 20cm/30cm 品种、并混入未封板的大涨大跌股。
         # 仅作为 akshare 涨停股池不可用时的兜底，apply_limit_ecosystem 会覆盖它。
         limit_up = sum(1 for value in changes if value >= 9.8)
@@ -899,12 +1043,15 @@ def fetch_market_breadth(existing):
         print(f"warning: using previous breadth data: {exc}", file=sys.stderr)
         try:
             snapshot = fetch_sina_market_snapshot()
-            mark("sentiment", "live", detail="eastmoney 失败，改用新浪全A快照", source="新浪全A快照")
             up = snapshot["up"]
             down = snapshot["down"]
             flat = snapshot["flat"]
             limit_up = snapshot["limitUp"]
             limit_down = snapshot["limitDown"]
+            # 同样拦盘前全平盘：新浪快照此时 up=down=0，不能标 live。
+            if up + down == 0:
+                raise RuntimeError("sina breadth all-flat (likely pre-open)")
+            mark("sentiment", "live", detail="eastmoney 失败，改用新浪全A快照", source="新浪全A快照")
             return {
                 **DEFAULT_SENTIMENT,
                 **previous,
@@ -1023,6 +1170,10 @@ def build_market_payload():
     fund_flows = fetch_fund_flows(existing)
     valuations = fetch_valuations(existing)
     sentiment = apply_limit_ecosystem(fetch_market_breadth(existing), now)
+    # 只有涨跌家数真实抓到（sentiment live）才记一笔温度历史，避免盘前/沿用旧值时
+    # 记入垃圾点或重复昨日。
+    sentiment_fresh = (FETCH_STATUS.get("sentiment") or {}).get("state") == "live"
+    sentiment["history"] = update_temperature_history(existing, sentiment, indices, now, sentiment_fresh)
     quick_stats[4]["valueText"] = prefer_recent(volume_analysis.get("today"), DEFAULT_VOLUME_ANALYSIS["today"])
     quick_stats[5]["valueText"] = prefer_recent(sentiment.get("upCount"), DEFAULT_SENTIMENT["upCount"])
     quick_stats[6]["valueText"] = prefer_recent(sentiment.get("downCount"), DEFAULT_SENTIMENT["downCount"])
@@ -1163,6 +1314,14 @@ def build_news_payload():
 
 
 def main():
+    now = datetime.now(SHANGHAI)
+    status = market_status(now)
+    # 这是盘后复盘工具。收盘前跑，很多接口只有 0/半成品数据（涨停池未成形、
+    # 成交额为 0），抓到的这一版会大量沿用上次并标 stale。明确告知用户。
+    if status not in ("已收盘", "休市"):
+        print(f"⚠️ 当前为「{status}」。本工具面向盘后复盘，收盘（15:00）后运行数据才完整；"
+              f"现在跑，涨停生态/成交额/涨跌家数等很可能沿用上一交易日并被标记为陈旧。",
+              file=sys.stderr)
     save_json("market.json", build_market_payload())
     save_json("news.json", build_news_payload())
 

@@ -240,6 +240,36 @@ function sanitizePlaceholders(value) {
   return placeholderWords.reduce((text, word) => text.replaceAll(word, "最近收盘样本"), value);
 }
 
+// Defense-in-depth against a dirty market.json: an index can't trade at 0 and
+// can't move ±100% in a session. Scrub such entries to "--" so heroSubtitle,
+// getTemperature, deriveStyleRows and renderIndices never surface -100% garbage
+// even if the data layer's guards were bypassed (old file, manual edit).
+const MAX_DAILY_INDEX_MOVE = 30;
+
+function isSaneIndex(item = {}) {
+  const value = Number(item.value);
+  const change = Number(item.changePercent);
+  if (Number.isFinite(value) && value <= 0) return false;
+  if (Number.isFinite(change) && Math.abs(change) >= MAX_DAILY_INDEX_MOVE) return false;
+  return true;
+}
+
+function sanitizeIndices(indices) {
+  if (!Array.isArray(indices)) return indices;
+  return indices.map((item) => {
+    if (isSaneIndex(item)) return item;
+    return {
+      ...item,
+      value: null,
+      valueText: "--",
+      changePercent: null,
+      changeText: "--",
+      sparkline: [],
+      dirty: true
+    };
+  });
+}
+
 function tone(value) {
   if (Number(value) > 0) return "up";
   if (Number(value) < 0) return "down";
@@ -465,13 +495,9 @@ function temperatureTone(value) {
 }
 
 function fallbackTemperatureHistory(current) {
-  const labels = ["06-06", "06-09", "06-10", "06-11", "06-12", "06-13", "06-16", "06-17", "06-18", "06-19", "06-20", "06-23", "06-24", "06-25", "06-26", "06-27", "06-30", "07-01", "07-02", "07-03", "07-06", "07-07", "07-08", "07-09"];
-  const values = [53, 55, 59, 52, 61, 64, 66, 58, 69, 72, 68, 75, 78, 70, 73, 63, 48, 45, 43, 50, 51, 28, 33, current.value];
-  return labels.map((label, index) => ({
-    label,
-    value: values[index],
-    tag: index === labels.length - 1 ? "今日" : temperatureLabel(values[index])
-  }));
+  // No real history yet (first run). Show only today rather than a fabricated
+  // month — the backend accumulates real points from here on.
+  return [{ label: "今日", value: current.value, tag: "今日" }];
 }
 
 function renderTemperatureHistory(sentiment = {}, current) {
@@ -1434,6 +1460,8 @@ async function boot() {
       readJsonOptional("insights.json")
     ]);
     const market = sanitizePlaceholders(rawMarket);
+    market.indices = sanitizeIndices(market.indices);
+    market.globalMarkets = sanitizeIndices(market.globalMarkets);
     const news = sanitizePlaceholders(rawNews);
     // A pasted-in-browser result takes precedence only when it is newer than
     // the file on disk, so a fresh save_insights.py run isn't shadowed by a
