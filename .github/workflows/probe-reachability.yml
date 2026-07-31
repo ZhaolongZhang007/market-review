@@ -1,0 +1,32 @@
+# 一次性连通性探测：GitHub 的美国机房能否访问中国财经数据源？
+# 只读、不写任何文件、不提交、不部署。手动触发。
+# 结论出来后这个文件就可以删掉。
+name: Probe data-source reachability
+
+on:
+  workflow_dispatch:        # 只手动触发，没有 cron
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Where is this runner
+        run: |
+          echo "出口 IP / 归属："
+          curl -s --max-time 10 https://ipinfo.io/json || echo "(ipinfo 不可达)"
+
+      - name: Probe raw endpoints (no deps)
+        run: python probe_reachability.py
+
+      - name: Install akshare
+        run: pip install --quiet akshare==1.18.65
+
+      - name: Probe akshare feeds
+        run: python probe_reachability.py --akshare

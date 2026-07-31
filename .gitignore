@@ -4,3 +4,8 @@ __pycache__/
 _site/
 .venv/
 prompt.txt
+
+# 密钥：只提交 .env.example，绝不提交 .env
+.env
+.env.*
+!.env.example
