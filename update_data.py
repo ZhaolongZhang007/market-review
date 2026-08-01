@@ -26,6 +26,14 @@ SINA_HEADERS = {
 PLACEHOLDER_TERMS = tuple("待" + suffix for suffix in ("交易日刷新", "刷新", "接入"))
 SINA_MARKET_CACHE = None
 
+# push2.eastmoney.com 实测长期 502（本地和 GitHub Actions 机房都一样），而
+# push2delay.eastmoney.com 是同一套接口的可用镜像：同 IP、同路径、**同 JSON 结构**，
+# 只是 Host 不同（akshare issue #7230 也是这个修法），所以默认先打 push2delay。
+# 注意 K 线不在此列——push2delay 的 kline 返回空 klines，日线兜底走 push2his → 新浪。
+EASTMONEY_HOSTS = ["push2delay.eastmoney.com", "push2.eastmoney.com"]
+EASTMONEY_LAST_HOST = ""      # 最近一次成功的 push2 系主机，供 mark() 如实标注
+_EASTMONEY_HOST_PREF = None   # 成功过的主机下次先试
+
 INDEX_SYMBOLS = [
     ("上证指数", "eastmoney", "1.000001", "000001.SS"),
     ("上证50", "eastmoney", "1.000016", "000016.SS"),
@@ -203,13 +211,50 @@ def request_bytes(url):
         return response.read()
 
 
+def eastmoney_hosts():
+    """轮换顺序：本轮成功过的主机排最前，避免在已挂的主机上反复空转。"""
+    hosts = list(EASTMONEY_HOSTS)
+    if _EASTMONEY_HOST_PREF in hosts:
+        hosts.remove(_EASTMONEY_HOST_PREF)
+        hosts.insert(0, _EASTMONEY_HOST_PREF)
+    return hosts
+
+
 def eastmoney_json(url):
-    def once():
-        req = urllib.request.Request(url, headers=EASTMONEY_HEADERS)
+    """东财 JSON。push2 系主机按 EASTMONEY_HOSTS 依次尝试，其它主机原样请求。
+
+    在这里换主机而不是在 5 个调用点各改一次 URL，将来东财再抽风只改一处。
+    """
+    global EASTMONEY_LAST_HOST, _EASTMONEY_HOST_PREF
+
+    parts = urllib.parse.urlsplit(url)
+    rotate = parts.netloc in EASTMONEY_HOSTS
+    hosts = eastmoney_hosts() if rotate else [parts.netloc]
+    # 多主机时压低单主机重试次数，总尝试次数才不会翻倍（宽度统计要翻 70 页）。
+    attempts = 2 if len(hosts) > 1 else 3
+
+    def once(target):
+        req = urllib.request.Request(target, headers=EASTMONEY_HEADERS)
         with urllib.request.urlopen(req, timeout=24) as response:
             return json.loads(response.read().decode("utf-8"))
 
-    return with_retry(once, label="eastmoney")
+    last = None
+    for host in hosts:
+        target = urllib.parse.urlunsplit(parts._replace(netloc=host))
+        try:
+            payload = with_retry(lambda: once(target), attempts=attempts, label=f"eastmoney {host}")
+        except Exception as exc:  # noqa: BLE001 - network layer
+            last = exc
+            if rotate:
+                print(f"warning: eastmoney host {host} failed: {exc}", file=sys.stderr)
+            continue
+        if host in EASTMONEY_HOSTS:
+            # 只记 push2 系主机：push2his / datacenter-web 的成功不该顶掉这个标注，
+            # 否则 fetch_eastmoney_quote 取完 K 线后来源就写错了。
+            EASTMONEY_LAST_HOST = host
+            _EASTMONEY_HOST_PREF = host
+        return payload
+    raise last if last else RuntimeError(f"eastmoney request failed: {url}")
 
 
 def request_json(url):
@@ -450,6 +495,47 @@ def fetch_sina_index(sina_code):
     }
 
 
+def fetch_sina_spot_index(sina_code):
+    """新浪指数全量快照兜底（走 vip.stock.finance.sina.com.cn，和 hq.sinajs.cn 不同入口）。
+
+    这个接口只给价格不给交易日，新鲜度改用交易日历判断：最近一个交易日等于今天、
+    且已经开过盘，才算今日数据；盘前拿到的其实是上一交易日收盘价，此时不认日期，
+    让调用方照实标 stale。
+    """
+    import akshare_feeds  # akshare 是可选依赖，装不上就让调用方 catch
+
+    data = akshare_feeds.fetch_index_spot_sina()
+    quote = (data.get("quotes") or {}).get(sina_code)
+    if not quote:
+        raise RuntimeError(f"新浪指数快照无 {sina_code}（{data.get('detail') or data.get('state')}）")
+
+    value = quote.get("value")
+    change_percent = quote.get("changePercent")
+    if change_percent is None:
+        raise RuntimeError(f"新浪指数快照无涨跌幅 {sina_code}")
+
+    now = datetime.now(SHANGHAI)
+    bar_date = akshare_feeds.latest_trade_date(now.strftime("%Y-%m-%d"))
+    if bar_date == now.strftime("%Y-%m-%d") and market_status(now) == "未开盘":
+        bar_date = None
+
+    try:
+        sparkline = fetch_sina_kline_closes(sina_code)
+    except Exception as exc:
+        print(f"warning: sina kline failed for {sina_code}: {exc}", file=sys.stderr)
+        sparkline = []
+
+    return {
+        "value": round(float(value), 4),
+        "valueText": format_number(float(value), 2),
+        "changePercent": round(float(change_percent), 4),
+        "changeText": format_percent(change_percent),
+        "barDate": bar_date,
+        "quoteSource": "sina-spot",
+        "sparkline": sparkline,
+    }
+
+
 def fetch_eastmoney_kline(secid, limit=35):
     url = (
         "https://push2his.eastmoney.com/api/qt/stock/kline/get"
@@ -547,6 +633,7 @@ def fetch_group(symbols, previous_items, section="indices"):
     output = []
     stale_names = []
     empty_names = []
+    used_sources = {}  # 实际命中的源 → 条数，用于如实填 fetchStatus.source
     for spec in symbols:
         if len(spec) == 2:
             name, yahoo_symbol = spec
@@ -565,6 +652,8 @@ def fetch_group(symbols, previous_items, section="indices"):
                 if is_valid_price(quote.get("value")):
                     item.update(quote)
                     fetched = current = True
+                    label = f"东财 {EASTMONEY_LAST_HOST}".strip()
+                    used_sources[label] = used_sources.get(label, 0) + 1
                 else:
                     print(f"warning: eastmoney returned invalid price for {name}: "
                           f"{quote.get('value')}", file=sys.stderr)
@@ -578,13 +667,22 @@ def fetch_group(symbols, previous_items, section="indices"):
                 item["sparkline"] = fetch_sina_kline_closes(sina_code)
             except Exception as exc:
                 print(f"warning: sina kline fallback failed for {name}: {exc}", file=sys.stderr)
-        if not fetched and sina_code:
+        # 新浪两档：先 hq.sinajs.cn 逐个代码，再 vip.stock.finance.sina.com.cn 全量
+        # 快照（不同入口，前者挂了后者仍可能通）。两档都排在 Yahoo 之前——Yahoo 对
+        # 部分 A 股指数的报价明显是错的。
+        for sina_label, sina_fetch in (
+            ("新浪 hq", fetch_sina_index),
+            ("新浪指数快照", fetch_sina_spot_index),
+        ):
+            if fetched or not sina_code:
+                break
             try:
-                quote = fetch_sina_index(sina_code)
+                quote = sina_fetch(sina_code)
                 if not is_valid_price(quote.get("value")):
                     raise RuntimeError(f"invalid price {quote.get('value')}")
                 item.update(quote)
                 fetched = True
+                used_sources[sina_label] = used_sources.get(sina_label, 0) + 1
                 bar_date = quote.get("barDate")
                 # Only claim "today" when the trade-date confirms it; a missing
                 # or older date means we can't verify freshness → mark stale.
@@ -593,10 +691,10 @@ def fetch_group(symbols, previous_items, section="indices"):
                 else:
                     item["stale"] = True
                     item["staleFrom"] = bar_date or "日期未知"
-                    item["staleReason"] = f"新浪数据日期 {bar_date or '缺失'}，非今日"
+                    item["staleReason"] = f"{sina_label}数据日期 {bar_date or '缺失'}，非今日"
                     stale_names.append(name)
             except Exception as exc:
-                print(f"warning: sina failed for {name}: {exc}", file=sys.stderr)
+                print(f"warning: {sina_label} failed for {name}: {exc}", file=sys.stderr)
         if not fetched and yahoo_symbol:
             try:
                 quote = fetch_yahoo_chart(yahoo_symbol)
@@ -604,6 +702,7 @@ def fetch_group(symbols, previous_items, section="indices"):
                     raise RuntimeError(f"invalid price {quote.get('value')}")
                 item.update(quote)
                 fetched = True
+                used_sources["Yahoo"] = used_sources.get("Yahoo", 0) + 1
                 bar_date = quote.get("barDate")
                 # Yahoo often serves an older single bar for the CN indices, so
                 # its change% can span several sessions. Keep the value, but do
@@ -642,13 +741,16 @@ def fetch_group(symbols, previous_items, section="indices"):
         output.append(item)
 
     unfresh = stale_names + empty_names
+    # 如实写出每个源各命中几条，而不是笼统的 "eastmoney/sina/yahoo"。
+    source_text = "、".join(f"{label}×{count}" for label, count in used_sources.items())
     if not unfresh:
-        mark(section, "live", source="eastmoney/sina/yahoo")
+        mark(section, "live", source=source_text or "unknown")
     elif len(unfresh) == len(output):
         state = "missing" if empty_names and not stale_names else "stale"
         mark(section, state, detail="未取得最新数据：" + "、".join(unfresh), source="previous")
     else:
-        mark(section, "partial", detail="未取得最新数据：" + "、".join(unfresh), source="mixed")
+        mark(section, "partial", detail="未取得最新数据：" + "、".join(unfresh),
+             source=(source_text + "，其余沿用上次") if source_text else "previous")
     return output
 
 
@@ -731,7 +833,20 @@ def fetch_volume_analysis(existing):
             return previous
 
 
+def sector_strength(change):
+    """板块强度 = 50 + 5×涨幅，clip 到 0–100。
+
+    前端和历史数据都依赖这个口径，换数据源时公式必须保持不变。
+    """
+    return max(0, min(100, round((float(change or 0) + 10) * 5, 2)))
+
+
 def fetch_hot_sectors(existing):
+    """热点板块，兜底链：东财 push2 clist → 同花顺行业板块 → 沿用上次。
+
+    push2.eastmoney.com 实测长期不稳（本地与 GitHub Actions 都频繁 502），
+    以前它是唯一来源，一挂这块就永远 stale。
+    """
     previous = existing.get("hotSectors") or DEFAULT_HOT_SECTORS
     url = (
         "https://push2.eastmoney.com/api/qt/clist/get"
@@ -743,25 +858,65 @@ def fetch_hot_sectors(existing):
         items = []
         for index, row in enumerate(rows, start=1):
             change = row.get("f3")
-            strength = max(0, min(100, round((float(change or 0) + 10) * 5, 2)))
             leaders = sector_leaders(row.get("f14"), [row.get("f128"), row.get("f140"), row.get("f12")])
             items.append({
                 "rank": index,
                 "name": row.get("f14"),
-                "strength": strength,
+                "strength": sector_strength(change),
                 "changeText": format_percent(change),
                 "reason": f"板块涨幅 {format_percent(change)}，领涨股 {row.get('f128') or '--'} {format_percent(row.get('f136'))}。",
                 "leaders": leaders,
             })
         if items:
-            mark("hotSectors", "live", source="eastmoney 板块涨幅")
+            mark("hotSectors", "live", source=f"东财 {EASTMONEY_LAST_HOST} 板块涨幅")
             return items
-        mark("hotSectors", "stale", detail="接口返回空", source="previous")
-        return previous
+        eastmoney_error = "接口返回空"
     except Exception as exc:
-        print(f"warning: using previous hot sector data: {exc}", file=sys.stderr)
-        mark("hotSectors", "stale", detail=str(exc), source="previous")
-        return normalize_hot_sectors(previous)
+        print(f"warning: eastmoney hot sectors failed: {exc}", file=sys.stderr)
+        eastmoney_error = str(exc)
+
+    items, ths_error = hot_sectors_from_ths()
+    if items:
+        mark("hotSectors", "live",
+             detail=f"东财 {'/'.join(EASTMONEY_HOSTS)} 均不可用（{eastmoney_error}）",
+             source="同花顺行业板块（东财全挂）")
+        return items
+
+    print(f"warning: using previous hot sector data: {ths_error}", file=sys.stderr)
+    mark("hotSectors", "stale",
+         detail=f"东财：{eastmoney_error}；同花顺：{ths_error}", source="previous")
+    return normalize_hot_sectors(previous)
+
+
+def hot_sectors_from_ths(limit=12):
+    """同花顺行业板块 → hotSectors 结构，字段口径与东财分支逐项对齐。
+
+    强度仍是 sector_strength()，领涨股仍过 sector_leaders()（同花顺只给一只领涨股，
+    不足的部分由既有兜底补，不编造）。返回 (items, error_detail)。
+    """
+    try:
+        import akshare_feeds
+    except Exception as exc:
+        return [], f"akshare_feeds 不可用：{exc}"
+
+    data = akshare_feeds.fetch_industry_board_ths(limit=limit)
+    rows = data.get("items") or []
+    if not rows:
+        return [], data.get("detail") or "同花顺行业板块返回空"
+
+    items = []
+    for index, row in enumerate(rows, start=1):
+        change = row.get("changePercent")
+        leader = row.get("leader")
+        items.append({
+            "rank": index,
+            "name": row.get("name"),
+            "strength": sector_strength(change),
+            "changeText": format_percent(change),
+            "reason": f"板块涨幅 {format_percent(change)}，领涨股 {leader or '--'} {format_percent(row.get('leaderChange'))}。",
+            "leaders": sector_leaders(row.get("name"), [leader]),
+        })
+    return items, ""
 
 
 def normalize_hot_sectors(items):
@@ -789,6 +944,7 @@ def sector_leaders(name, observed):
 
 
 def fetch_fund_flows(existing):
+    """行业资金流，兜底链：东财 push2 clist → 同花顺行业资金流 → 沿用上次。"""
     previous = existing.get("fundFlows") or DEFAULT_FUND_FLOWS
     url = (
         "https://push2.eastmoney.com/api/qt/clist/get"
@@ -807,14 +963,60 @@ def fetch_fund_flows(existing):
             for row in rows
         ]
         if items:
-            mark("fundFlows", "live", source="eastmoney 资金流向")
+            mark("fundFlows", "live", source=f"东财 {EASTMONEY_LAST_HOST} 资金流向")
             return items
-        mark("fundFlows", "stale", detail="接口返回空", source="previous")
-        return previous
+        eastmoney_error = "接口返回空"
     except Exception as exc:
-        print(f"warning: using previous fund flow data: {exc}", file=sys.stderr)
-        mark("fundFlows", "stale", detail=str(exc), source="previous")
-        return previous
+        print(f"warning: eastmoney fund flows failed: {exc}", file=sys.stderr)
+        eastmoney_error = str(exc)
+
+    items, ths_error = fund_flows_from_ths()
+    if items:
+        mark("fundFlows", "live",
+             detail=f"东财 {'/'.join(EASTMONEY_HOSTS)} 均不可用（{eastmoney_error}）",
+             source="同花顺行业资金流（东财全挂）")
+        return items
+
+    print(f"warning: using previous fund flow data: {ths_error}", file=sys.stderr)
+    mark("fundFlows", "stale",
+         detail=f"东财：{eastmoney_error}；同花顺：{ths_error}", source="previous")
+    return previous
+
+
+def fund_flows_from_ths(limit=10):
+    """同花顺行业资金流 → fundFlows 结构。返回 (items, error_detail)。
+
+    口径差异：同花顺给的是行业整体流入/流出，没有东财的"主力净流入占比"(f184)。
+    与其套一个口径不同的比例，summary 里直接写流入/流出两个真实数字。
+    """
+    try:
+        import akshare_feeds
+    except Exception as exc:
+        return [], f"akshare_feeds 不可用：{exc}"
+
+    data = akshare_feeds.fetch_industry_fund_flow_ths(limit=limit)
+    rows = data.get("items") or []
+    if not rows:
+        return [], data.get("detail") or "同花顺行业资金流返回空"
+
+    items = []
+    for row in rows:
+        net = row.get("net")
+        if net is None:
+            continue
+        inflow, outflow = row.get("inflow"), row.get("outflow")
+        flow_text = ""
+        if inflow is not None and outflow is not None:
+            flow_text = f"（流入 {format_amount(inflow)}／流出 {format_amount(outflow)}）"
+        items.append({
+            "name": row.get("name"),
+            "valueText": format_amount(net),
+            "direction": "up" if net > 0 else "down",
+            "summary": f"行业资金净额 {format_amount(net)}{flow_text}，板块涨幅 {format_percent(row.get('changePercent'))}。",
+        })
+    if not items:
+        return [], "同花顺行业资金流无有效行"
+    return items, ""
 
 
 def fetch_valuations(existing):
@@ -1029,7 +1231,7 @@ def fetch_market_breadth(existing):
         # 仅作为 akshare 涨停股池不可用时的兜底，apply_limit_ecosystem 会覆盖它。
         limit_up = sum(1 for value in changes if value >= 9.8)
         limit_down = sum(1 for value in changes if value <= -9.8)
-        mark("sentiment", "live", source="eastmoney 全A快照")
+        mark("sentiment", "live", source=f"东财 {EASTMONEY_LAST_HOST} 全A快照")
         return {
             **previous,
             "upCount": str(up),
@@ -1202,9 +1404,9 @@ def build_market_payload():
         # 由 make_prompt.py → chat → save_insights.py 生成到 insights.json。
         "insightsFile": "insights.json",
         "dataSources": {
-            "indices": "东方财富行情中心优先，Yahoo Finance 兜底",
-            "sectors": "东方财富板块涨幅",
-            "fundFlows": "东方财富资金流向",
+            "indices": "东方财富行情中心（push2delay → push2）优先，新浪（hq → 指数快照）次之，Yahoo Finance 兜底",
+            "sectors": "东方财富板块涨幅（push2delay → push2），同花顺行业板块兜底",
+            "fundFlows": "东方财富资金流向（push2delay → push2），同花顺行业资金流兜底",
             "valuation": "参考东方财富估值分析 https://data.eastmoney.com/gzfx/",
             "sentiment": "东方财富全A收盘统计；同花顺、雪球热度作复核",
             "news": "新浪财经、中新网、财新、证券时报、财联社等公开源",

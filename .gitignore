@@ -9,3 +9,7 @@ prompt.txt
 .env
 .env.*
 !.env.example
+
+# dry-run 调试产物
+api_schema.debug.json
+insights.error.json

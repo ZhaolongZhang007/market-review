@@ -1,0 +1,153 @@
+name: Daily market update
+
+on:
+  schedule:
+    # GitHub 的 cron 是 UTC。A 股 15:00 收盘 = 07:00 UTC。
+    # 主跑：16:35 北京时间（收盘后 95 分钟，等涨停股池定稿）。
+    - cron: "35 8 * * 1-5"
+    # 备份：19:05 北京时间。GitHub 的定时任务会在高负载时延迟甚至整个漏掉，
+    # 单一 cron 不足以支撑无人值守。下面有幂等检查，重复跑会自己跳过。
+    - cron: "5 11 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "跳过交易日与幂等检查，强制跑一次"
+        type: boolean
+        default: false
+
+# 主跑和备份跑万一撞上，不能同时写仓库。
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── 闸 1：今天是交易日吗 ─────────────────────────────
+      # 失败开放：日历源挂了就按工作日处理，宁可多跑一次也不要静默跳过。
+      - name: Trading-day gate
+        id: calendar
+        run: python check_trading_day.py || true
+
+      # 只是记一笔。真正的跳过靠后面每一步的 if 条件链——
+      # 在 step 里 exit 0 不会终止 job，别指望它。
+      - name: Note non-trading day
+        if: >-
+          steps.calendar.outputs.is_trading_day != 'true'
+          && inputs.force != true
+        run: echo "::notice::今天不是交易日（${{ steps.calendar.outputs.reason }}），后续步骤将跳过。"
+
+      # ── 闸 2：今天是不是已经跑过了 ───────────────────────
+      # 备份 cron 存在的意义是补主跑漏掉的情况；主跑成功了就不该重复花钱。
+      - name: Idempotency check
+        id: fresh
+        if: >-
+          steps.calendar.outputs.is_trading_day == 'true'
+          || inputs.force == true
+        run: |
+          TODAY=$(TZ=Asia/Shanghai date +%F)
+          COMMITTED=$(python -c "import json;print(json.load(open('market.json')).get('tradingDate',''))" 2>/dev/null || echo "")
+          echo "committed=$COMMITTED  today=$TODAY"
+          if [ "$COMMITTED" = "$TODAY" ] && [ "${{ inputs.force }}" != "true" ]; then
+            echo "already_done=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::今天的数据已经在仓库里了，跳过。"
+          else
+            echo "already_done=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── 抓取 ────────────────────────────────────────────
+      - name: Fetch market data
+        if: steps.fresh.outputs.already_done == 'false'
+        run: python update_data.py
+
+      # update_data.py 吞掉所有异常且永远 exit 0，所以必须单独验货。
+      - name: Quality gate — publishable?
+        id: publishable
+        if: steps.fresh.outputs.already_done == 'false'
+        run: |
+          if python check_data_quality.py --gate publish; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::error::数据质量不达标，本次不发布。"
+            exit 1
+          fi
+
+      - name: Quality gate — worth generating insights?
+        id: worth_generating
+        if: steps.publishable.outputs.ok == 'true'
+        run: |
+          if python check_data_quality.py --gate insights; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::数据偏旧，跳过 AI 生成以免产出自信的错误评论（保留上一份）。"
+          fi
+
+      # ── 生成洞察 ────────────────────────────────────────
+      # 密钥只在这一步注入，且走 env 而不是 run 里的字符串插值。
+      #
+      # continue-on-error：行情数据和 AI 观点是两个独立产物。生成失败不该
+      # 连累已经抓好的行情——那份数据本身有价值，前端对 insights 缺失/日期
+      # 不符都有占位和黄条。作业最后仍会因此变红（见 Fail if insights failed）。
+      - name: Generate insights
+        id: insights
+        if: steps.worth_generating.outputs.ok == 'true'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5' }}
+        run: python generate_insights.py
+
+      # ── 提交（提交即部署：Pages 直接从 main 根目录发布）──
+      # GITHUB_TOKEN 产生的提交不会再触发工作流，不存在死循环。
+      - name: Commit and deploy
+        if: steps.publishable.outputs.ok == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add market.json news.json insights.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "::notice::数据无变化，无需提交。"
+            exit 0
+          fi
+          git commit -m "每日行情更新 $(TZ=Asia/Shanghai date +%F)"
+          git push
+
+      # 行情已经发出去了，但生成失败仍要让作业变红——否则没人知道
+      # 观点已经停更几天了（GitHub 只在失败时发邮件）。
+      - name: Fail if insights generation failed
+        if: steps.insights.outcome == 'failure'
+        run: |
+          echo "::error::行情数据已发布，但 AI 观点生成失败，页面仍显示上一份观点。"
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### 每日更新结果"
+            echo ""
+            echo "| 步骤 | 结果 |"
+            echo "|---|---|"
+            echo "| 交易日 | ${{ steps.calendar.outputs.is_trading_day || 'n/a' }} — ${{ steps.calendar.outputs.reason || '' }} |"
+            echo "| 今日已跑过 | ${{ steps.fresh.outputs.already_done || 'n/a' }} |"
+            echo "| 数据可发布 | ${{ steps.publishable.outputs.ok || 'n/a' }} |"
+            echo "| 生成洞察 | ${{ steps.worth_generating.outputs.ok || 'n/a' }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
