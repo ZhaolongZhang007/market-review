@@ -834,6 +834,18 @@ a {
   color: var(--up);
 }
 
+/* temperatureTone 会产出 5 档（hot/warm/repair/cool/ice），
+   这两档以前没有样式——胶囊改成按档位取色后会用到。 */
+.temperature-history-tags .warm {
+  background: rgba(255,122,69,0.12);
+  color: #ff9b6a;
+}
+
+.temperature-history-tags .cool {
+  background: rgba(88,140,255,0.12);
+  color: #75a7ff;
+}
+
 .temperature-sources {
   display: flex;
   flex-wrap: wrap;
@@ -2563,6 +2575,15 @@ a {
   background: rgba(22, 119, 255, 0.08);
   border-color: rgba(22, 119, 255, 0.3);
   color: #91caff;
+}
+
+/* 占位假数据比"数据陈旧"严重得多——陈旧至少是某个交易日的真实值，
+   占位是硬编码的虚构样本。必须一眼看出区别。 */
+.data-banner.error {
+  background: rgba(255, 77, 79, 0.10);
+  border-color: rgba(255, 77, 79, 0.45);
+  color: #ffa39e;
+  font-weight: 600;
 }
 
 .data-banner i {

@@ -19,7 +19,7 @@
 """
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -44,28 +44,61 @@ def load():
         return None, f"market.json 解析失败：{exc}"
 
 
+def resolve_expected_trading_day():
+    """**独立**解析最近交易日，不读 market.json。
+
+    这是这道闸能成立的前提：以前判据是 `market.tradingDate == 今天`，而
+    tradingDate 正是 update_data.py 用 now() 写进去的——被检对象自己出具
+    证明，判据恒真。全网断线那天 CI 照样绿。
+    """
+    today = datetime.now(SHANGHAI).strftime("%Y-%m-%d")
+    try:
+        sys.path.insert(0, str(ROOT))
+        import akshare_feeds
+        resolved = akshare_feeds.latest_trade_date(today)
+        if resolved:
+            return resolved, today, True
+    except Exception:
+        pass
+    probe = datetime.now(SHANGHAI)
+    while probe.weekday() >= 5:
+        probe = probe - timedelta(days=1)
+    return probe.strftime("%Y-%m-%d"), today, False
+
+
 def audit(market):
     """返回 (报告 dict, 问题列表)。"""
     problems = []
     status = market.get("fetchStatus") or {}
-    today = datetime.now(SHANGHAI).strftime("%Y-%m-%d")
+    expected_day, today, calendar_trusted = resolve_expected_trading_day()
 
     trading_date = market.get("tradingDate")
-    date_is_today = trading_date == today
+    # 和独立解析出的交易日比对，而不是和"今天"比。
+    date_is_today = trading_date == expected_day
 
     core_live = [s for s in CORE_SECTIONS if (status.get(s) or {}).get("state") in LIVE_STATES]
     core_dead = [s for s in CORE_SECTIONS if s not in core_live]
     aux_live = [s for s in AUX_SECTIONS if (status.get(s) or {}).get("state") in LIVE_STATES]
 
-    # 脏值检查：0 或荒谬涨幅说明前面修好的防御被绕过了。
+    # fallback 比 stale 严重得多：stale 是"旧但真实"，fallback 是 DEFAULT_* 里
+    # 硬编码的虚构样本（上涨1876/成交3.11万亿）。以前两者同等对待，于是全网
+    # 断线那天页面照常显示一份看起来很正常的假数据。
+    fabricated = [s for s in CORE_SECTIONS + AUX_SECTIONS
+                  if (status.get(s) or {}).get("state") in ("fallback", "missing")]
+
+    # 脏值检查要覆盖 globalMarkets——KOSPI +17.91% 就是从这里漏掉的，
+    # 而且不同标的量纲不同，用一个 30% 通吃会放过所有海外指数的异常。
     dirty = []
-    for item in market.get("indices") or []:
-        value = item.get("value")
-        change = item.get("changePercent")
-        if value is not None and isinstance(value, (int, float)) and value <= 0:
-            dirty.append(f"{item.get('name')} value={value}")
-        if change is not None and isinstance(change, (int, float)) and abs(change) >= 30:
-            dirty.append(f"{item.get('name')} change={change}%")
+    for group, limit in (("indices", 12.0), ("globalMarkets", 12.0)):
+        for item in market.get(group) or []:
+            name = item.get("name")
+            value = item.get("value")
+            change = item.get("changePercent")
+            cap = 3.0 if "人民币" in str(name) else limit   # 汇率日内波动量纲完全不同
+            if isinstance(value, (int, float)) and value <= 0:
+                dirty.append(f"{name} value={value}")
+            if isinstance(change, (int, float)) and abs(change) >= cap:
+                dirty.append(f"{name} change={change}%(上限{cap})")
 
     sentiment = market.get("sentiment") or {}
     try:
@@ -76,22 +109,28 @@ def audit(market):
     breadth_dead = (up + down) == 0
 
     if not date_is_today:
-        problems.append(f"tradingDate={trading_date} 不是今天({today})")
+        problems.append(f"tradingDate={trading_date}，独立解析的最近交易日是 {expected_day}")
     if core_dead:
         problems.append(f"核心板块未取到最新值：{'、'.join(core_dead)}")
+    if fabricated:
+        problems.append(f"以下板块在用硬编码占位数据（非真实行情）：{'、'.join(fabricated)}")
     if dirty:
         problems.append(f"存在脏值：{'；'.join(dirty[:4])}")
     if breadth_dead:
         problems.append(f"涨跌家数为 0（上涨{up}/下跌{down}）")
+    if not calendar_trusted:
+        problems.append("交易日历不可用，交易日判定为兜底推算")
 
     return {
         "tradingDate": trading_date,
+        "expectedDay": expected_day,
         "today": today,
         "dateIsToday": date_is_today,
         "coreLive": core_live,
         "coreDead": core_dead,
         "auxLive": aux_live,
         "auxTotal": len(AUX_SECTIONS),
+        "fabricated": fabricated,
         "dirty": dirty,
         "breadthDead": breadth_dead,
     }, problems
@@ -119,9 +158,11 @@ def main():
         print(f"脏值      : {'；'.join(report['dirty'][:5])}")
 
     if gate == "publish":
-        # 发布门槛低：只要这轮抓取确实针对今天跑过就发。
-        # 陈旧板块前端已有 stale 标注，发出去比空白页诚实。
-        blocking = [p for p in problems if "不是今天" in p or "脏值" in p]
+        # 发布门槛低：陈旧板块前端有 stale 标注，发出去比空白页诚实。
+        # 但三种情况绝不发布：交易日对不上（整轮没起作用）、有脏值、
+        # 或核心板块在用硬编码假数据（比空白页更糟——它看起来是真的）。
+        blocking = [p for p in problems
+                    if "最近交易日是" in p or "脏值" in p or "硬编码占位数据" in p]
         ok = not blocking
         print(f"\n[publish] {'✓ 可以发布' if ok else '✗ 不发布'}")
         for p in blocking:

@@ -7,7 +7,7 @@ import time as time_module
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, time, timezone
+from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -596,6 +596,27 @@ def fetch_eastmoney_quote(secid):
     }
 
 
+# 单日涨跌幅的现实上限，按品种分级。以前没有这道校验，Yahoo 给出的
+# 「韩国KOSPI +17.91%」被原样写进 market.json 并喂给模型——前端后来虽然
+# 挡住了显示，但数据文件和 prompt 里仍是脏的。要在源头拒收。
+MOVE_LIMIT_INDEX = 12.0
+MOVE_LIMIT_FX = 3.0
+
+
+def move_limit_for(name):
+    return MOVE_LIMIT_FX if any(k in str(name) for k in ("人民币", "汇率")) else MOVE_LIMIT_INDEX
+
+
+def is_sane_change(name, change):
+    """涨跌幅是否在该品种的现实区间内。None 视为通过（缺失由别处处理）。"""
+    if change is None:
+        return True
+    try:
+        return abs(float(change)) < move_limit_for(name)
+    except (TypeError, ValueError):
+        return False
+
+
 def is_valid_price(value):
     """A real index/stock price is a positive number.
 
@@ -713,6 +734,10 @@ def fetch_group(symbols, previous_items, section="indices"):
                     item["stale"] = True
                     item["staleFrom"] = bar_date or "日期未知"
                     item["staleReason"] = f"Yahoo 数据日期 {bar_date or '缺失'}，涨幅非单日口径"
+                    # 机器可读标记：让前端能可靠地隐藏这个涨幅，而不是去匹配中文
+                    # 字符串。之前只有 staleReason 文字，前端读不懂，于是把跨多日
+                    # 的 Yahoo 涨幅当当日涨幅显示——韩国KOSPI 曾因此显示 +17.91%。
+                    item["changeSpansMultipleSessions"] = True
                     stale_names.append(name)
             except Exception as exc:
                 print(f"warning: yahoo failed for {name}: {exc}", file=sys.stderr)
@@ -733,6 +758,19 @@ def fetch_group(symbols, previous_items, section="indices"):
         elif current:
             item["stale"] = False
             item["asOf"] = now.strftime("%Y-%m-%d %H:%M")
+        # 源头拒收不可能的涨跌幅。价格通常还是对的（就是那天的收盘），
+        # 所以只丢弃涨跌幅并标注原因，不整条作废。
+        if not is_sane_change(name, item.get("changePercent")):
+            bogus = item.get("changePercent")
+            print(f"warning: {name} 涨跌幅 {bogus}% 超出 {move_limit_for(name)}% 上限，已丢弃",
+                  file=sys.stderr)
+            item["changePercent"] = None
+            item["changeText"] = "--"
+            item["changeRejected"] = f"{bogus}%（超出单日 {move_limit_for(name)}% 上限）"
+            item["stale"] = True
+            item.setdefault("staleReason", f"涨跌幅 {bogus}% 不可能，已丢弃")
+            if name not in stale_names:
+                stale_names.append(name)
         # 必须在所有取数分支之后：新浪/Yahoo 分支各自会设置 sparkline。
         append_live_point(item)
         item.setdefault("valueText", "--")
@@ -1059,6 +1097,103 @@ def strip_stale_commentary(items):
     return cleaned
 
 
+# ── 交易日锚点 ──────────────────────────────────────────────────────────
+# 全局唯一的"这份数据属于哪个交易日"基准。以前没有这个东西，于是
+# tradingDate 直接用 now() 写——脚本跑过就等于今天，导致质量门禁自证清白
+# （全网断线也判"可以发布"），周末还会往情绪温度历史里塞假数据点。
+TRADING_DAY = None
+
+
+def resolve_trading_day(now):
+    """<= 今天的最近一个交易日。取不到日历时退回"今天"，并如实标注不确定。
+
+    返回 (交易日, 是否可信)。失败开放：宁可当成交易日多跑一次，也不要因为
+    日历源挂了而静默跳过——后者看起来一切正常，是最糟的失败模式。
+    """
+    today = now.strftime("%Y-%m-%d")
+    try:
+        import akshare_feeds
+        resolved = akshare_feeds.latest_trade_date(today)
+    except Exception:
+        resolved = None
+    if resolved:
+        return resolved, True
+    # 兜底：周末往前推到周五，工作日就用今天。
+    probe = now
+    while probe.weekday() >= 5:
+        probe = probe - timedelta(days=1)
+    return probe.strftime("%Y-%m-%d"), False
+
+
+def trading_date_text(trading_day, now):
+    """「2026年7月31日 周五」；非当日时补一句，避免周末看到'今天'的错觉。"""
+    try:
+        parsed = datetime.strptime(trading_day, "%Y-%m-%d")
+    except (TypeError, ValueError):
+        return f"{now.year}年{now.month}月{now.day}日 周{weekday_cn(now)}"
+    text = f"{parsed.year}年{parsed.month}月{parsed.day}日 周{weekday_cn(parsed)}"
+    if trading_day != now.strftime("%Y-%m-%d"):
+        text += "（最近交易日）"
+    return text
+
+
+def is_current_session(now=None):
+    """今天本身就是交易日吗？（用于决定要不要往历史序列里追加数据点）"""
+    now = now or datetime.now(SHANGHAI)
+    return TRADING_DAY == now.strftime("%Y-%m-%d")
+
+
+def _style_avg(indices, names):
+    """指定指数的平均涨幅。跳过脏值和陈旧值——它们会把风格判定带偏。"""
+    values = []
+    for item in indices or []:
+        if item.get("name") not in names or item.get("stale"):
+            continue
+        change = item.get("changePercent")
+        value = item.get("value")
+        if not isinstance(change, (int, float)) or abs(change) >= 30:
+            continue
+        if isinstance(value, (int, float)) and value <= 0:
+            continue
+        values.append(float(change))
+    return sum(values) / len(values) if values else None
+
+
+def compute_style_matrix(indices):
+    """从当日指数涨幅算风格判定。
+
+    以前这里是 `existing.get("styleMatrix") or DEFAULT_STYLE_MATRIX`——从来没算过，
+    只是把上一份文件里的结论原样搬运。结果三个维度长期全部说反：小票 +2.89% 强于
+    大盘 +0.48% 时页面写"小票显著弱于权重"。而且这份错误结论还进了喂给模型的
+    digest，模型照抄，页面首屏跟着一起错。
+    """
+    pairs = [
+        ("大盘 / 小票", ["上证50", "沪深300", "上证指数"], ["中证2000", "中证500", "微盘股"],
+         "大盘占优", "小票占优"),
+        ("价值 / 成长", ["上证50", "沪深300"], ["科创50", "创业板50", "中证2000"],
+         "价值占优", "成长占优"),
+        ("红利 / 科技", ["上证50"], ["科创50", "创业板50"],
+         "红利占优", "科技占优"),
+    ]
+    rows = []
+    for label, right_names, left_names, right_label, left_label in pairs:
+        right = _style_avg(indices, right_names)
+        left = _style_avg(indices, left_names)
+        if right is None or left is None:
+            rows.append({"label": label, "value": "待确认", "score": 50})
+            continue
+        diff = right - left
+        # 与 app.js scoreFromDiff 保持一致：50 为中性，每 1% 差值 22 分，钳到 8–92。
+        score = max(8, min(92, round(50 + diff * 22)))
+        rows.append({
+            "label": label,
+            "value": right_label if diff >= 0 else left_label,
+            "score": score,
+            "detail": f"{right_names[0]}等 {right:+.2f}% / {left_names[0]}等 {left:+.2f}%",
+        })
+    return rows
+
+
 def _num(value):
     """Parse a number out of "6.2%" / "1923" / 3.5 / None."""
     if value is None:
@@ -1132,25 +1267,40 @@ def update_temperature_history(existing, sentiment, indices, now, is_fresh):
     """
     prior = (existing.get("sentiment") or {}).get("history") or []
     # Keep only points this code wrote (they carry a real `date`), discarding the
-    # original fabricated series.
-    history = [h for h in prior if isinstance(h, dict) and h.get("date")]
+    # original fabricated series. Also drop weekend points written before the
+    # trading-day anchor existed — 08-01(六) 和 08-02(日) 各被记过一个 80，
+    # 把周五的收盘数据当成了两个独立交易日，月均和冰点次数全被污染。
+    history = [h for h in prior
+               if isinstance(h, dict) and h.get("date") and _is_weekday(h["date"])]
 
     if not is_fresh:
         return history[-24:]
 
+    # 只在"今天确实是交易日"时记点。抓取成功 ≠ 有新的交易 session：
+    # 周末跑一次同样能抓到周五的收盘数据，但那不是新的一天。
+    if not is_current_session(now):
+        return history[-24:]
+
+    # 已经记过这个交易日就覆盖，不新增——否则一天跑两次（主 cron + 备份 cron）
+    # 会在图上留下两根一模一样的柱子。
     value = compute_temperature(sentiment, indices)
-    today = now.strftime("%Y-%m-%d")
     point = {
-        "date": today,
-        "label": now.strftime("%m-%d"),
+        "date": TRADING_DAY,
+        "label": TRADING_DAY[5:].replace("-", "-"),
         "value": value,
         "tag": temperature_label(value),
     }
-    if history and history[-1].get("date") == today:
-        history[-1] = point  # same-day re-run overwrites
-    else:
-        history.append(point)
+    history = [h for h in history if h.get("date") != TRADING_DAY]
+    history.append(point)
+    history.sort(key=lambda h: h.get("date") or "")
     return history[-24:]
+
+
+def _is_weekday(date_str):
+    try:
+        return datetime.strptime(date_str, "%Y-%m-%d").weekday() < 5
+    except (TypeError, ValueError):
+        return False
 
 
 def apply_limit_ecosystem(sentiment, now):
@@ -1196,9 +1346,39 @@ def apply_limit_ecosystem(sentiment, now):
             merged[key] = data[key]
     merged["limitCaliber"] = data.get("caliber", "东方财富涨停股池口径")
     merged["limitSampleDate"] = data.get("sampleDate")
+    # summary 必须跟着数字一起重写。以前只覆盖数字不覆盖文字，于是同一屏里
+    # 面板显示"涨停 99"而正文写"涨停约 215 家"——215 是 fetch_market_breadth
+    # 用"涨跌幅≥9.8%"数出来的近似值，早已被这里的股池口径取代。
+    merged["summary"] = build_sentiment_summary(merged)
     mark("limitEcosystem", "partial" if state == "partial" else "live",
          detail=data.get("detail", ""), source="akshare 东财股池")
     return merged
+
+
+def build_sentiment_summary(sentiment):
+    """用同一套权威数字生成情绪摘要，保证文字与面板不打架。"""
+    def num(key):
+        raw = sentiment.get(key)
+        try:
+            return int(str(raw).replace(",", ""))
+        except (TypeError, ValueError):
+            return None
+
+    up, down = num("upCount"), num("downCount")
+    limit_up, limit_down = num("limitUp"), num("limitDown")
+    parts = []
+    if up is not None and down is not None:
+        parts.append(f"全 A 上涨 {up} 家、下跌 {down} 家")
+    if limit_up is not None and limit_down is not None:
+        parts.append(f"涨停 {limit_up} 家、跌停 {limit_down} 家")
+    boards = sentiment.get("consecutiveBoards")
+    if boards:
+        parts.append(boards)
+    rate = sentiment.get("breakRate")
+    if rate:
+        parts.append(f"炸板率 {rate}")
+    caliber = sentiment.get("limitCaliber") or "东方财富涨停股池口径"
+    return "；".join(parts) + f"。涨停/跌停采用{caliber}。" if parts else ""
 
 
 def fetch_market_breadth(existing):
@@ -1330,7 +1510,11 @@ def weekday_cn(now):
 
 
 def build_market_payload():
+    global TRADING_DAY
     now = datetime.now(SHANGHAI)
+    TRADING_DAY, calendar_trusted = resolve_trading_day(now)
+    if not calendar_trusted:
+        print(f"warning: 交易日历不可用，按最近工作日 {TRADING_DAY} 处理", file=sys.stderr)
     existing = read_existing("market.json")
     indices = fetch_group(INDEX_SYMBOLS, existing.get("indices", []), section="indices")
     global_markets = fetch_group(GLOBAL_SYMBOLS, existing.get("globalMarkets", []), section="globalMarkets")
@@ -1366,7 +1550,7 @@ def build_market_payload():
         },
     ])
 
-    style_matrix = existing.get("styleMatrix") or DEFAULT_STYLE_MATRIX
+    style_matrix = compute_style_matrix(indices)
     volume_analysis = fetch_volume_analysis(existing)
     hot_sectors = fetch_hot_sectors(existing)
     fund_flows = fetch_fund_flows(existing)
@@ -1385,8 +1569,11 @@ def build_market_payload():
     return {
         "updatedAt": now.isoformat(),
         "updatedAtText": now.strftime("%H:%M"),
-        "tradingDate": now.strftime("%Y-%m-%d"),
-        "tradingDateText": f"{now.year}年{now.month}月{now.day}日 周{weekday_cn(now)}",
+        # 交易日锚点，不是"脚本跑的那天"。以前这里写 now()，于是质量门禁的
+        # 判据 tradingDate == 今天 恒真——全网断线也判"可以发布"。
+        "tradingDate": TRADING_DAY,
+        "tradingDateText": trading_date_text(TRADING_DAY, now),
+        "runDate": now.strftime("%Y-%m-%d"),
         "marketStatus": market_status(now),
         "turnoverText": quick_stats[4]["valueText"],
         "indices": indices,

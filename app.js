@@ -244,13 +244,20 @@ function sanitizePlaceholders(value) {
 // can't move ±100% in a session. Scrub such entries to "--" so heroSubtitle,
 // getTemperature, deriveStyleRows and renderIndices never surface -100% garbage
 // even if the data layer's guards were bypassed (old file, manual edit).
-const MAX_DAILY_INDEX_MOVE = 30;
+// 单一的 30% 阈值通吃三种量纲完全不同的标的，结果放过了「韩国KOSPI +17.91%」
+// ——主要指数单日涨 18% 在历史上近乎不可能，但 17.91 < 30 就漏过去了。
+// 按品种分级：宽基指数（A股与海外）现实上限约 12%，汇率约 3%。
+const MOVE_LIMITS = { index: 12, fx: 3 };
+
+function moveLimitFor(name = "") {
+  return /人民币|汇率|USD|CNH|CNY/i.test(String(name)) ? MOVE_LIMITS.fx : MOVE_LIMITS.index;
+}
 
 function isSaneIndex(item = {}) {
   const value = Number(item.value);
   const change = Number(item.changePercent);
   if (Number.isFinite(value) && value <= 0) return false;
-  if (Number.isFinite(change) && Math.abs(change) >= MAX_DAILY_INDEX_MOVE) return false;
+  if (Number.isFinite(change) && Math.abs(change) >= moveLimitFor(item.name)) return false;
   return true;
 }
 
@@ -292,10 +299,18 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+// 所有"选最大值 / 求平均"的推导都必须排除 stale 和 dirty，否则会出现
+// 页面顶部黄条刚说"中证2000 未取到最新值"，两屏之后驾驶舱头条就写
+// "进攻模式：中证2000 +3.20%" 的情况——引用的正是刚被标为不可信的那个数。
+function isUsableIndex(item = {}) {
+  return Number.isFinite(item.changePercent) && !item.stale && !item.dirty;
+}
+
 function getTopIndex(indices = []) {
-  return [...indices]
-    .filter((item) => Number.isFinite(item.changePercent))
-    .sort((a, b) => b.changePercent - a.changePercent)[0] || {};
+  const usable = [...indices].filter(isUsableIndex);
+  // 全都不可用时宁可返回空（下游有 safe(topIndex.name, "核心指数") 兜底），
+  // 也不要拿一个已知不可信的数去当头条。
+  return usable.sort((a, b) => b.changePercent - a.changePercent)[0] || {};
 }
 
 function getTopSector(sectors = []) {
@@ -485,6 +500,21 @@ function temperatureLabel(value) {
   return "冰点";
 }
 
+// 这段解读原本后半句写死「仍处在试探修复阶段…升级到活跃」，于是 5 档标签里
+// 有 4 档会自相矛盾——今天标签是「亢奋」，解读却说还在修复、还没到活跃。
+const TEMPERATURE_BRIEFS = {
+  亢奋: "情绪已在高位，赚钱效应集中但分歧随时放大。若涨停生态转弱或炸板率抬升，温度会从「亢奋」回落到「活跃」。",
+  活跃: "赚钱效应已经确立。若涨跌家数和涨停生态继续走强，温度才会从「活跃」升级到「亢奋」。",
+  修复: "市场仍处在试探修复阶段。若涨跌家数和涨停生态同步改善，温度才会从「修复」升级到「活跃」。",
+  谨慎: "做多情绪偏弱、试错成本高。需先看到涨跌家数和涨停生态回暖，温度才会从「谨慎」回到「修复」。",
+  冰点: "情绪处于极端低位，超跌反弹前不宜主动进攻。需等涨跌家数和涨停生态止跌，温度才会从「冰点」回到「谨慎」。"
+};
+
+function temperatureBrief(label) {
+  const body = TEMPERATURE_BRIEFS[label] || "关注涨跌家数与涨停生态的边际变化。";
+  return `${label}区间，${body}`;
+}
+
 function temperatureTone(value) {
   const score = Number(value);
   if (score >= 78) return "hot";
@@ -541,15 +571,15 @@ function renderTemperatureHistory(sentiment = {}, current) {
           <div class="temperature-day ${temperatureTone(item.value)} ${isToday ? "today" : ""} ${isExtreme ? "extreme" : ""}" title="${escapeHtml(tooltip)}" style="--score:${item.value}%">
             <i></i>
             <span>${escapeHtml(item.label)}</span>
-            ${isToday || isExtreme ? `<b>${isToday ? "今日" : item === minItem ? "冰点" : "高温"}</b>` : ""}
+            ${isToday || isExtreme ? `<b>${isToday ? "今日" : item === minItem ? "最低" : "最高"}</b>` : ""}
           </div>
         `;
       }).join("")}
     </div>
     <div class="temperature-history-tags">
-      <span class="ice">冰点 ${minItem.label} ${minItem.value}</span>
-      <span class="repair">当前 ${today.tag || temperatureLabel(today.value)}</span>
-      <span class="hot">高温 ${maxItem.label} ${maxItem.value}</span>
+      <span class="${temperatureTone(minItem.value)}">最低 ${escapeHtml(minItem.label)} ${minItem.value} ${temperatureLabel(minItem.value)}</span>
+      <span class="${temperatureTone(today.value)}">当前 ${today.value} ${today.tag || temperatureLabel(today.value)}</span>
+      <span class="${temperatureTone(maxItem.value)}">最高 ${escapeHtml(maxItem.label)} ${maxItem.value} ${temperatureLabel(maxItem.value)}</span>
     </div>
   `;
 }
@@ -576,36 +606,35 @@ function heatmapTone(item = {}) {
 }
 
 function fallbackHeatmaps(market = {}) {
+  // 这里原本硬编码了一组美股行业（AI算力 -5.82% …）和一组港股行业
+  // （特种化工 -10.79% …）。而 market.marketHeatmaps 这个键从来不存在，
+  // 所以兜底 100% 命中——那些数字每天原样显示，且与同页真实的
+  // 「纳斯达克 +1.00%」直接打架。宁可少显示一组，也不能编数字。
   const aShare = (market.hotSectors || []).slice(0, 10).map((item, index) => ({
     name: item.name,
     changeText: item.changeText,
     size: index < 2 ? "lg" : index < 6 ? "md" : "sm",
     note: (item.leaders || []).slice(0, 3).join(" / ")
   }));
-  return [
-    {
-      market: "美股",
-      subtitle: "隔夜映射",
-      items: [
-        { name: "AI算力", changeText: "-5.82%", size: "lg" },
-        { name: "基础软件", changeText: "-5.31%", size: "md" },
-        { name: "半导体封测", changeText: "-5.21%", size: "md" },
-        { name: "炼油销售", changeText: "+4.66%", size: "sm" },
-        { name: "数字资产", changeText: "-4.72%", size: "sm" }
-      ]
-    },
-    { market: "A股", subtitle: "今日收盘", items: aShare },
-    {
-      market: "港股",
-      subtitle: "联动观察",
-      items: [
-        { name: "特种化工", changeText: "-10.79%", size: "lg" },
-        { name: "通信线缆", changeText: "-9.55%", size: "lg" },
-        { name: "印制电路板", changeText: "-8.12%", size: "md" },
-        { name: "油气服务", changeText: "+2.78%", size: "sm" }
-      ]
-    }
-  ];
+
+  // 美股这组改用真实的宽基指数（我们确实有这份数据），而不是编造行业涨跌。
+  const US_NAMES = ["道琼斯", "纳斯达克", "标普500"];
+  const overseas = (market.globalMarkets || [])
+    .filter((item) => US_NAMES.includes(item.name) && !item.dirty &&
+                      item.changeText && item.changeText !== "--")
+    .map((item, index) => ({
+      name: item.name,
+      changeText: item.changeText,
+      size: index === 0 ? "lg" : "md"
+    }));
+
+  const groups = [];
+  if (overseas.length) {
+    groups.push({ market: "美股", subtitle: "隔夜宽基指数", items: overseas });
+  }
+  groups.push({ market: "A股", subtitle: "今日收盘板块", items: aShare });
+  // 港股：没有数据源就不渲染这一组。
+  return groups;
 }
 
 function renderMarketHeatmap(market = {}) {
@@ -868,7 +897,7 @@ function renderDecisionHub(market = {}) {
   `).join("");
   $("#temperatureBrief").innerHTML = `
     <strong>温度解读：</strong>
-    <span>${temp.label}区间，说明市场仍处在试探修复阶段。若涨跌家数和涨停生态同步改善，温度才会从“修复”升级到“活跃”。</span>
+    <span>${escapeHtml(temperatureBrief(temp.label))}</span>
   `;
   renderTemperatureHistory(sentiment, temp);
   $("#temperatureSources").innerHTML = (sentiment.sources || ["东方财富收盘样本", "同花顺复核", "雪球复核"]).map((source) => `
@@ -950,9 +979,11 @@ function indexByName(items, name) {
 }
 
 function avgChange(items, names) {
+  // 同 getTopIndex：陈旧/脏值不能进任何均值，否则会污染风格判定和情绪温度。
   const values = names
-    .map((name) => indexByName(items, name).changePercent)
-    .filter((value) => Number.isFinite(value));
+    .map((name) => indexByName(items, name))
+    .filter(isUsableIndex)
+    .map((item) => item.changePercent);
   if (!values.length) return null;
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
@@ -1874,13 +1905,37 @@ function renderDataBanner(market = {}, insights) {
     alerts.push({ level: "info", text: `尚未生成洞察内容。${INSIGHTS_HINT}` });
   }
 
+  // 告警要分级。以前 `state !== "live"` 一刀切，把四种语义压成同一句话：
+  //   fallback/missing — 硬编码的占位数字，根本不是任何交易日的真实行情
+  //   stale            — 旧但真实（上一交易日的值）
+  //   partial          — 部分标的没取到，其余是新的
+  // 结果最严重的 fallback 和最无害的 partial 长得一模一样，而且因为海外指数
+  // 结构上天天 partial，这条黄条永远亮着，等于没有告警。
   const status = market.fetchStatus || {};
-  const stale = Object.entries(status).filter(([, value]) => value && value.state !== "live");
-  if (stale.length) {
-    const detail = stale.map(([key, value]) => `${key}（${value.state}）`).join("、");
+  const entries = Object.entries(status).filter(([, v]) => v && v.state);
+  const fabricated = entries.filter(([, v]) => v.state === "fallback" || v.state === "missing");
+  const carried = entries.filter(([, v]) => v.state === "stale");
+  const partial = entries.filter(([, v]) => v.state === "partial");
+
+  if (fabricated.length) {
+    alerts.push({
+      level: "error",
+      text: `以下板块本次与上次抓取均失败，显示的是占位默认值，不代表任何真实交易日：${
+        fabricated.map(([k]) => k).join("、")}`
+    });
+  }
+  if (carried.length) {
     alerts.push({
       level: "warn",
-      text: `以下数据本次未抓到最新值，页面上显示的是上次结果：${detail}`
+      text: `以下板块沿用上一交易日的数据：${
+        carried.map(([k, v]) => v.source ? `${k}（${v.source}）` : k).join("、")}`
+    });
+  }
+  // partial 只是"部分标的没取到"，卡片上已有逐条角标，不值得占一条横幅。
+  if (partial.length) {
+    alerts.push({
+      level: "info",
+      text: `部分标的未取到最新值（${partial.map(([k]) => k).join("、")}），相关卡片已单独标注。`
     });
   }
 

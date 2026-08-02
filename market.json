@@ -1,8 +1,9 @@
 {
-  "updatedAt": "2026-08-02T02:09:08.149162+08:00",
-  "updatedAtText": "02:09",
-  "tradingDate": "2026-08-02",
-  "tradingDateText": "2026年8月2日 周日",
+  "updatedAt": "2026-08-02T09:54:35.635489+08:00",
+  "updatedAtText": "09:54",
+  "tradingDate": "2026-07-31",
+  "tradingDateText": "2026年7月31日 周五（最近交易日）",
+  "runDate": "2026-08-02",
   "marketStatus": "休市",
   "turnoverText": "2.56万亿",
   "indices": [
@@ -53,7 +54,7 @@
         3832.26
       ],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     },
     {
       "name": "上证50",
@@ -102,7 +103,7 @@
         2922.97
       ],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     },
     {
       "name": "中证2000",
@@ -149,7 +150,8 @@
       "barDate": "2026-07-31",
       "stale": true,
       "staleFrom": "2026-07-31",
-      "staleReason": "Yahoo 数据日期 2026-07-31，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-07-31，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "中证500",
@@ -198,7 +200,7 @@
         7493.99
       ],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     },
     {
       "name": "沪深300",
@@ -247,7 +249,7 @@
         4588.2
       ],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     },
     {
       "name": "科创50",
@@ -296,7 +298,7 @@
         1635.96
       ],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     },
     {
       "name": "创业板50",
@@ -345,7 +347,7 @@
         3520.13
       ],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     },
     {
       "name": "微盘股",
@@ -360,7 +362,7 @@
       "amountText": "178.54亿",
       "sparkline": [],
       "stale": false,
-      "asOf": "2026-08-02 02:09"
+      "asOf": "2026-08-02 09:54"
     }
   ],
   "quickStats": [
@@ -452,7 +454,8 @@
       "barDate": "2026-08-01",
       "stale": true,
       "staleFrom": "2026-08-01",
-      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "纳斯达克",
@@ -500,7 +503,8 @@
       "barDate": "2026-08-01",
       "stale": true,
       "staleFrom": "2026-08-01",
-      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "标普500",
@@ -548,7 +552,8 @@
       "barDate": "2026-08-01",
       "stale": true,
       "staleFrom": "2026-08-01",
-      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "日经225",
@@ -596,7 +601,8 @@
       "barDate": "2026-07-31",
       "stale": true,
       "staleFrom": "2026-07-31",
-      "staleReason": "Yahoo 数据日期 2026-07-31，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-07-31，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "韩国KOSPI",
@@ -604,8 +610,8 @@
       "source": "yahoo",
       "value": 6595.45,
       "valueText": "6,595.45",
-      "changePercent": 17.9115,
-      "changeText": "+17.91%",
+      "changePercent": null,
+      "changeText": "--",
       "sparkline": [
         6398.5698,
         6390.2598,
@@ -644,7 +650,9 @@
       "barDate": "2026-07-31",
       "stale": true,
       "staleFrom": "2026-07-31",
-      "staleReason": "Yahoo 数据日期 2026-07-31，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-07-31，涨幅非单日口径",
+      "changeSpansMultipleSessions": true,
+      "changeRejected": "17.9115%（超出单日 12.0% 上限）"
     },
     {
       "name": "德国DAX",
@@ -692,7 +700,8 @@
       "barDate": "2026-08-01",
       "stale": true,
       "staleFrom": "2026-08-01",
-      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "法国CAC40",
@@ -740,7 +749,8 @@
       "barDate": "2026-08-01",
       "stale": true,
       "staleFrom": "2026-08-01",
-      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     },
     {
       "name": "离岸人民币",
@@ -787,24 +797,28 @@
       "barDate": "2026-08-01",
       "stale": true,
       "staleFrom": "2026-08-01",
-      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径"
+      "staleReason": "Yahoo 数据日期 2026-08-01，涨幅非单日口径",
+      "changeSpansMultipleSessions": true
     }
   ],
   "styleMatrix": [
     {
       "label": "大盘 / 小票",
-      "value": "小票显著弱于权重",
-      "score": 18
+      "value": "小票占优",
+      "score": 8,
+      "detail": "上证50等 +0.48% / 中证2000等 +2.74%"
     },
     {
       "label": "价值 / 成长",
-      "value": "价值防守明显占优",
-      "score": 74
+      "value": "成长占优",
+      "score": 8,
+      "detail": "上证50等 +0.36% / 科创50等 +3.04%"
     },
     {
       "label": "红利 / 科技",
-      "value": "红利、公用事业胜出",
-      "score": 88
+      "value": "科技占优",
+      "score": 8,
+      "detail": "上证50等 -0.12% / 科创50等 +3.04%"
     }
   ],
   "volumeAnalysis": {
@@ -1214,7 +1228,7 @@
     "consecutiveBoards": "最高9板，2板以上10只",
     "breakRate": "51.9%",
     "sampleDate": "2026-07-23 收盘",
-    "summary": "全 A 样本上涨 4395 家、下跌 695 家，涨停约 215 家、跌停约 1 家。ST 个股涨跌停口径未单独拆分。",
+    "summary": "全 A 上涨 4395 家、下跌 695 家；涨停 99 家、跌停 0 家；最高9板，2板以上10只；炸板率 51.9%。涨停/跌停采用东方财富涨停股池口径。",
     "sources": [
       "新浪财经全A收盘样本",
       "东方财富行情复核",
@@ -1232,18 +1246,6 @@
         "label": "07-23",
         "value": 68,
         "tag": "活跃"
-      },
-      {
-        "date": "2026-08-01",
-        "label": "08-01",
-        "value": 80,
-        "tag": "亢奋"
-      },
-      {
-        "date": "2026-08-02",
-        "label": "08-02",
-        "value": 80,
-        "tag": "亢奋"
       }
     ],
     "breakRateValue": 51.9,
