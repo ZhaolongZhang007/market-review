@@ -2805,3 +2805,35 @@ a {
   border: 1px dashed var(--border);
   border-radius: 6px;
 }
+
+/* 风格结论：模型生成的 styleVerdict（带具体数字），取代原来的机械模板串 */
+.style-verdict-title {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.style-verdict-body {
+  display: block;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.style-verdict-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.style-verdict-tags em {
+  border: 1px solid rgba(22,119,255,0.22);
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: rgba(22,119,255,0.08);
+  color: var(--accent-light);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 700;
+}

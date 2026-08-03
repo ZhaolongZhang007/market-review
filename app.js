@@ -993,7 +993,7 @@ function scoreFromDiff(diff) {
   return Math.max(8, Math.min(92, Math.round(50 + diff * 22)));
 }
 
-function renderStyleMatrix(market) {
+function renderStyleMatrix(market, insights) {
   const matrix = deriveStyleRows(market);
 
   $("#styleMatrix").innerHTML = matrix.map((item) => `
@@ -1016,7 +1016,25 @@ function renderStyleMatrix(market) {
     </div>
   `).join("");
 
-  $("#styleSummary").textContent = matrix.map((item) => `${item.label}：${item.value}`).join("；") + "。交易上优先选择与主风格共振的趋势强势股。";
+  // 模型生成的 styleVerdict 一直被丢弃：prompt 要了、schema 校验了、
+  // normalize 截断了，然后没人渲染——同时这里显示一句机械拼接的模板串。
+  // 模型那份带具体数字和陈旧标注，比模板串有信息量得多。
+  const verdict = insights && insights.styleVerdict;
+  const mechanical = matrix.map((item) => `${item.label}：${item.value}`).join("；")
+    + "。交易上优先选择与主风格共振的趋势强势股。";
+
+  if (verdict && verdict.summary) {
+    const tags = Array.isArray(verdict.tags) ? verdict.tags.filter(Boolean) : [];
+    $("#styleSummary").innerHTML = `
+      ${verdict.title ? `<strong class="style-verdict-title">${escapeHtml(verdict.title)}</strong>` : ""}
+      <span class="style-verdict-body">${escapeHtml(verdict.summary)}</span>
+      ${tags.length ? `<span class="style-verdict-tags">${
+        tags.map((t) => `<em>${escapeHtml(t)}</em>`).join("")}</span>` : ""}
+    `;
+  } else {
+    // 没有洞察时退回机械描述——比空白强，也如实反映"还没生成"。
+    $("#styleSummary").textContent = mechanical;
+  }
 }
 
 function renderIndices(items) {
@@ -1510,7 +1528,7 @@ async function boot() {
     renderEventTimeline(market);
     renderConsensus(market);
     renderIndices(market.indices);
-    renderStyleMatrix(market);
+    renderStyleMatrix(market, insights);
     renderVolume(market.volumeAnalysis);
     renderMarketHeatmap(market);
     renderMainlineBoard(market.hotSectors);
