@@ -792,6 +792,51 @@ def fetch_group(symbols, previous_items, section="indices"):
     return output
 
 
+def merge_volume_series(previous_bars, trading_day, amount, limit=22):
+    """按交易日维护滚动成交额序列，返回 (bars, 上一交易日金额)。
+
+    以前兜底路径是「整个复用上一份 bars，只替换最后一根」，于是前 21 根
+    永远冻结在东财 K 线最后一次成功的那天，末根标签被每天覆盖——中间的
+    交易日全被顶掉（页面上出现 07-21 直接跳到 08-05），末根高度还写死 100%。
+
+    改成按 date 归并：同一交易日覆盖、新交易日追加、按日期排序保留最近 N 根，
+    高度按真实最大值重算。这样即使数据源反复挂掉，序列也只是少几根，
+    不会错位或吞掉中间的日子。
+    """
+    series = {}
+    for bar in previous_bars or []:
+        if not isinstance(bar, dict):
+            continue
+        date = bar.get("date")
+        value = bar.get("amount")
+        # 老数据只有 label 没有 date/amount，无法参与重算——丢弃，
+        # 宁可序列短一点，也不要把两套口径混在一张图上。
+        if date and isinstance(value, (int, float)) and value > 0:
+            series[date] = float(value)
+
+    if trading_day and amount and amount > 0:
+        series[trading_day] = float(amount)
+
+    ordered = sorted(series.items())[-limit:]
+    if not ordered:
+        return [], None
+
+    peak = max(value for _, value in ordered) or 1
+    bars = [
+        {
+            "date": date,
+            "label": date[5:],
+            "amount": value,
+            "amountText": format_amount(value),
+            "value": round(value / peak * 100, 2),
+        }
+        for date, value in ordered
+    ]
+    # 上一交易日 = 序列里今天之前的那根，而不是"上一次运行时的 today"
+    prev_amount = ordered[-2][1] if len(ordered) > 1 and ordered[-1][0] == trading_day else None
+    return bars, prev_amount
+
+
 def fetch_volume_analysis(existing):
     previous = existing.get("volumeAnalysis") or DEFAULT_VOLUME_ANALYSIS
     try:
@@ -809,22 +854,22 @@ def fetch_volume_analysis(existing):
         if not today or today <= 0:
             mark("volumeAnalysis", "stale", detail="当日成交额为0（可能盘前）", source="previous")
             return previous
-        prev = rows[-2]["amount"] if len(rows) > 1 else None
+        # K 线本身就是完整序列，直接用它重建（并顺带补进历史里缺的日子）。
+        merged = {row["date"]: row["amount"] for row in rows}
+        for bar in previous.get("bars") or []:
+            if isinstance(bar, dict) and bar.get("date") and bar.get("amount"):
+                merged.setdefault(bar["date"], bar["amount"])
+        bars, prev = merge_volume_series(
+            [{"date": d, "amount": a} for d, a in merged.items()],
+            rows[-1]["date"], today)
         change = ((today - prev) / prev * 100) if prev else None
-        max_amount = max(row["amount"] for row in rows) or 1
         payload = {
             "today": format_amount(today),
             "previous": format_amount(prev) if prev else "--",
-            "change": format_percent(change),
+            "change": format_percent(change) if change is not None else "--",
             "summary": "近一个月沪深两市成交额按上证指数与深证成指日线成交额合并估算。放量上涨更利于趋势强势股延续，缩量上涨则等待回踩确认。",
-            "bars": [
-                {
-                    "label": row["date"][5:],
-                    "amountText": format_amount(row["amount"]),
-                    "value": round(row["amount"] / max_amount * 100, 2),
-                }
-                for row in rows
-            ],
+            "bars": bars,
+            "sampleDate": f"{rows[-1]['date']} 收盘",
         }
         mark("volumeAnalysis", "live", source="eastmoney K线")
         return payload
@@ -837,30 +882,20 @@ def fetch_volume_analysis(existing):
             if not today or today <= 0:
                 raise RuntimeError("sina turnover is 0 (likely pre-open)")
             mark("volumeAnalysis", "live", detail="eastmoney 失败，改用新浪快照", source="新浪全A快照")
-            prev_text = prefer_recent(previous.get("today"), DEFAULT_VOLUME_ANALYSIS["previous"])
-            previous_amount = None
-            if "万亿" in str(prev_text):
-                previous_amount = float(str(prev_text).replace("万亿", "")) * 1e12
-            elif "亿" in str(prev_text):
-                previous_amount = float(str(prev_text).replace("亿", "")) * 1e8
-            change = ((today - previous_amount) / previous_amount * 100) if previous_amount else None
-            bars = list(previous.get("bars") or DEFAULT_VOLUME_ANALYSIS["bars"])
-            max_amount_text = format_amount(today)
-            if bars:
-                bars[-1] = {
-                    "label": datetime.now(SHANGHAI).strftime("%m-%d"),
-                    "value": 100,
-                    "amountText": max_amount_text,
-                }
+            today_text = format_amount(today)
+            # 按交易日归并，而不是"复用旧数组只换最后一根"。上一交易日的金额
+            # 从序列里取，不再拿"上一次运行的 today"当上一交易日——同日重跑
+            # 会得到拿今天跟今天比的 -0.04%。
+            bars, prev_amount = merge_volume_series(previous.get("bars"), TRADING_DAY, today)
+            change = ((today - prev_amount) / prev_amount * 100) if prev_amount else None
             return {
-                **DEFAULT_VOLUME_ANALYSIS,
-                **previous,
-                "today": max_amount_text,
-                "previous": prev_text,
-                "change": format_percent(change) if change is not None else "收盘放量",
-                "summary": f"成交额采用新浪财经全A收盘样本合计，约 {max_amount_text}。若与交易所口径存在差异，以交易所正式披露为准。",
+                "today": today_text,
+                "previous": format_amount(prev_amount) if prev_amount else "--",
+                "change": format_percent(change) if change is not None else "--",
+                "summary": f"成交额采用新浪财经全A收盘样本合计，约 {today_text}。"
+                           f"若与交易所口径存在差异，以交易所正式披露为准。",
                 "bars": bars,
-                "sampleDate": datetime.now(SHANGHAI).strftime("%Y-%m-%d 收盘"),
+                "sampleDate": f"{TRADING_DAY} 收盘",
             }
         except Exception as sina_exc:
             print(f"warning: using fallback volume sample: {sina_exc}", file=sys.stderr)

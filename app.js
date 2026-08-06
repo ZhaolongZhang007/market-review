@@ -1126,7 +1126,8 @@ function renderVolume(volume = {}) {
         </div>
       `).join("")}
     </div>
-    <div class="volume-note">柱状图口径：沪深两市成交额近22个交易日；盘中接口不可用时，自动沿用最近一次A股收盘后样本。</div>
+    <div class="volume-note">柱状图口径：沪深两市成交额，最多保留近 22 个交易日。序列按交易日归并——
+      东财日线可用时一次性回填整段，否则每个交易日累积一根，缺失的交易日会留空而不是被顶掉。</div>
   `;
   $("#volumeSummary").textContent = recentText(volume.summary, "成交量采用最近一次A股收盘后样本。");
   $("#volumeChecklist").innerHTML = [
