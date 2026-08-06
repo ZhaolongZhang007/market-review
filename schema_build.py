@@ -210,8 +210,15 @@ class _Compiler:
         node = {
             "type": "object",
             "properties": properties,
-            # Same rationale as compile_root: shape is fully determined.
-            "required": sorted(set(spec.get("required") or []) | set(fields)),
+            # 只用源 schema 声明的必填，**不要**把所有字段并进来。
+            #
+            # 之前这里是 `set(声明的) | set(全部字段)`，于是 stockPool 的
+            # code/action/sector/risk/horizon 全变必填。而 hotSectors[].leaders
+            # 只存名字不存代码，数据里根本没有这些股票的代码可给，prompt 又
+            # （正确地）禁止杜撰——模型被逼到死角，只能把拿不准的整条丢掉。
+            # 结果 2026-08-05 那天"10-15 只"的股票池只剩 1 只。
+            # 让可选字段保持可选，模型才能给出名字确定、代码未知的条目。
+            "required": sorted(spec.get("required") or []),
             "additionalProperties": False,
         }
         return self._describe(node, spec)

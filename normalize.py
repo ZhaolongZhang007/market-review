@@ -286,10 +286,59 @@ def normalize(data, market, bounds_table, masters_cfg=None, attempts=1):
     # 5. derived numbers are computed, not clamped
     report["consensus"] = recompute_consensus(data, bounds_table or {})
 
+    # 6. 代码是事实，不该让模型回忆。我们手上有龙虎榜和涨停梯队的代码，
+    #    直接填；填不上的留空——前端只显示名字，比一个记错的代码强。
+    report["codesFilled"] = fill_known_codes(data, market)
+
     # tidy: report["truncated"] as plain paths is what the runbook reads
     report["truncatedDetail"] = report["truncated"]
     report["truncated"] = [item["path"] for item in report["truncatedDetail"]]
     return data, report
+
+
+def known_codes(market):
+    """market.json 里现成的 名字→代码 映射（龙虎榜 + 涨停梯队龙头）。"""
+    codes = {}
+    for row in (market or {}).get("lhb") or []:
+        name, code = row.get("name"), row.get("code")
+        if name and code and not _is_placeholder(code):
+            codes.setdefault(str(name).strip(), str(code).strip())
+    leaders = ((market or {}).get("sentiment") or {}).get("limitUpLeaders") or []
+    for row in leaders:
+        name, code = row.get("name"), row.get("code")
+        if name and code and not _is_placeholder(code):
+            codes.setdefault(str(name).strip(), str(code).strip())
+    return codes
+
+
+def fill_known_codes(data, market):
+    """把已知代码填进 stockPool / consensus.picks，并清掉 '—' 之类的占位。
+
+    以前 code 在编译出的 schema 里是必填，而板块龙头在 market.json 里只有
+    名字没有代码——模型要么杜撰要么整条不放，实测选择了后者，10-15 只的
+    股票池塌成 1 只。现在 code 可选，能填的我们填，填不上就留空。
+    """
+    codes = known_codes(market)
+    filled = cleared = 0
+
+    def apply(rows):
+        nonlocal filled, cleared
+        for row in rows or []:
+            if not isinstance(row, dict):
+                continue
+            name = str(row.get("name") or "").strip()
+            current = row.get("code")
+            if _is_placeholder(current):
+                row.pop("code", None)
+                cleared += 1
+                current = None
+            if not current and name in codes:
+                row["code"] = codes[name]
+                filled += 1
+
+    apply(data.get("stockPool"))
+    apply(((data.get("consensus") or {}) if isinstance(data.get("consensus"), dict) else {}).get("picks"))
+    return {"available": len(codes), "filled": filled, "placeholdersCleared": cleared}
 
 
 def summarize(report):

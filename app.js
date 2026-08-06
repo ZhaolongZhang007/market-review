@@ -1441,7 +1441,9 @@ function renderStockPool(items) {
       <div class="stock-pool-top">
         <div>
           <strong>${escapeHtml(item.name)}</strong>
-          <span>${escapeHtml(item.code)} · ${escapeHtml(item.sector)}</span>
+          <!-- code 现在是可选的（数据里常常没有板块龙头的代码），
+               缺失时不要渲染出一个孤零零的 " · " 分隔符 -->
+          <span>${escapeHtml([item.code, item.sector].filter(Boolean).join(" · "))}</span>
         </div>
         <em>${escapeHtml(item.action)}</em>
       </div>
