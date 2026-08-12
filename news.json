@@ -1,236 +1,31 @@
 {
-  "updatedAt": "2026-08-11T17:38:26.900574+08:00",
+  "updatedAt": "2026-08-12T17:46:38.280963+08:00",
   "items": [
     {
-      "title": "山西大同定调“十五五”农业方向：打造国家级冷凉蔬菜产业基地",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675864.shtml",
+      "title": "成都车展前瞻：新能源消费潜力释放 技术普惠加速落地",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676461.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:35:20 +0800",
-      "publishedAtText": "08-11 17:35",
+      "publishedAt": "Wed, 12 Aug 2026 16:58:10 +0800",
+      "publishedAtText": "08-12 16:58",
       "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "大连金融监管局：上半年累计为85个重点项目授信775.4亿元",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675863.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:33:42 +0800",
-      "publishedAtText": "08-11 17:33",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "白山跑出高质量发展加速度",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675850.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:14:39 +0800",
-      "publishedAtText": "08-11 17:14",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "近、快、凉、绿、稳——解码大同算力产业“五字诀”",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675852.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:07:46 +0800",
-      "publishedAtText": "08-11 17:07",
-      "impactTags": [
-        "算力"
-      ],
-      "impactedStocks": [
-        "工业富联",
-        "中际旭创",
-        "新易盛"
-      ],
-      "impactNote": "可能影响：工业富联、中际旭创、新易盛"
-    },
-    {
-      "title": "“China Chic”圈粉外国消费者——把中国“好物”带回家",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675827.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:04:52 +0800",
-      "publishedAtText": "08-11 17:04",
-      "impactTags": [
+        "新能源",
         "消费"
-      ],
-      "impactedStocks": [
-        "贵州茅台",
-        "五粮液",
-        "中国中免"
-      ],
-      "impactNote": "可能影响：贵州茅台、五粮液、中国中免"
-    },
-    {
-      "title": "融合发展，老区文旅更红火（经济聚焦·老区新产业）",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675844.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:03:50 +0800",
-      "publishedAtText": "08-11 17:03",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "5年，10万亿元增量！底气藏在能消费、敢消费、愿消费的每一笔账单里→",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675835.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:03:16 +0800",
-      "publishedAtText": "08-11 17:03",
-      "impactTags": [
-        "消费"
-      ],
-      "impactedStocks": [
-        "贵州茅台",
-        "五粮液",
-        "中国中免"
-      ],
-      "impactNote": "可能影响：贵州茅台、五粮液、中国中免"
-    },
-    {
-      "title": "尺素金声丨中国新兴产业快速发展是因为产业补贴吗？",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675831.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 17:02:50 +0800",
-      "publishedAtText": "08-11 17:02",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "财政部拟发行2026年记账式贴现（四十九期）国债",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675841.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 16:54:33 +0800",
-      "publishedAtText": "08-11 16:54",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "保持定力、向质提升 我国民营企业创新动能持续增强",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675820.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 16:40:04 +0800",
-      "publishedAtText": "08-11 16:40",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "好评中国丨经济新脉动：电影“+”出了什么？",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675804.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 16:38:02 +0800",
-      "publishedAtText": "08-11 16:38",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "重庆力争到2030年服务业增加值迈上2.5万亿元新台阶",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675826.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 16:36:52 +0800",
-      "publishedAtText": "08-11 16:36",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "昌九高铁进入静态验收阶段",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675799.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 16:11:31 +0800",
-      "publishedAtText": "08-11 16:11",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "车身动辄2米宽、频遭停车难 新能源车为何越造越大？",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675801.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 16:06:32 +0800",
-      "publishedAtText": "08-11 16:06",
-      "impactTags": [
-        "新能源"
       ],
       "impactedStocks": [
         "宁德时代",
         "阳光电源",
-        "比亚迪"
+        "比亚迪",
+        "贵州茅台",
+        "五粮液"
       ],
-      "impactNote": "可能影响：宁德时代、阳光电源、比亚迪"
+      "impactNote": "可能影响：宁德时代、阳光电源、比亚迪、贵州茅台、五粮液"
     },
     {
-      "title": "A股收评：创业板指收涨，沪指、深指收跌",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675760.shtml",
+      "title": "10675亿元、29.9%……透过活力数据感知经济发展“稳”“进”“好”",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676377.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 15:56:45 +0800",
-      "publishedAtText": "08-11 15:56",
+      "publishedAt": "Wed, 12 Aug 2026 16:51:46 +0800",
+      "publishedAtText": "08-12 16:51",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -242,27 +37,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "从实验室样机到产线生产力 报告称人形机器人加速跨越鸿沟",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675785.shtml",
+      "title": "【活力中国调研行】活力湖南：“烟火气”打底 、“硬实力”撑腰",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676408.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 15:52:55 +0800",
-      "publishedAtText": "08-11 15:52",
-      "impactTags": [
-        "机器人"
-      ],
-      "impactedStocks": [
-        "雷赛智能",
-        "大洋电机",
-        "埃斯顿"
-      ],
-      "impactNote": "可能影响：雷赛智能、大洋电机、埃斯顿"
-    },
-    {
-      "title": "新股超纯应材上市首日涨幅超6倍 中一签约赚24.4万元",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675763.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 15:19:31 +0800",
-      "publishedAtText": "08-11 15:19",
+      "publishedAt": "Wed, 12 Aug 2026 16:47:16 +0800",
+      "publishedAtText": "08-12 16:47",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -274,11 +53,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "乐山“十五五”力争经济总量突破3200亿元 两大产业向千亿级迈进",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675738.shtml",
+      "title": "中国南方五省区用电负荷年内累计20余次创新高",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676443.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 14:54:21 +0800",
-      "publishedAtText": "08-11 14:54",
+      "publishedAt": "Wed, 12 Aug 2026 16:29:01 +0800",
+      "publishedAtText": "08-12 16:29",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -290,27 +69,251 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "营口海蜇：从渤海湾“游”向世界的“软黄金”",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675734.shtml",
+      "title": "单项冠军县，何以扛打丨拿下全球7成淡水珍珠，诸暨如何做到的",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676381.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 14:49:01 +0800",
-      "publishedAtText": "08-11 14:49",
+      "publishedAt": "Wed, 12 Aug 2026 16:25:00 +0800",
+      "publishedAtText": "08-12 16:25",
       "impactTags": [
-        "黄金"
+        "全A风险偏好"
       ],
       "impactedStocks": [
-        "紫金矿业",
-        "山东黄金",
-        "赤峰黄金"
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
       ],
-      "impactNote": "可能影响：紫金矿业、山东黄金、赤峰黄金"
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "8月11日“农产品批发价格200指数”比昨天上升0.09个点",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-11/10675733.shtml",
+      "title": "8月12日“农产品批发价格200指数”比昨天上升0.16个点",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676425.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 11 Aug 2026 14:45:55 +0800",
-      "publishedAtText": "08-11 14:45",
+      "publishedAt": "Wed, 12 Aug 2026 16:12:26 +0800",
+      "publishedAtText": "08-12 16:12",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "亚洲首个柔直海上风电项目累计发电量突破100亿千瓦时",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676419.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 16:03:37 +0800",
+      "publishedAtText": "08-12 16:03",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "今年上半年 河北服务业对该省经济增长贡献率达66.5%",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676398.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 15:33:45 +0800",
+      "publishedAtText": "08-12 15:33",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "A股收评：超4100只个股飘红，三大指数集体收涨",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676370.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 15:21:20 +0800",
+      "publishedAtText": "08-12 15:21",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "C919首条国际航线开通",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676388.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 15:17:02 +0800",
+      "publishedAtText": "08-12 15:17",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "手机电脑涨幅潮愈演愈烈 专家称短期内难缓解",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676368.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 14:58:41 +0800",
+      "publishedAtText": "08-12 14:58",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "财政部拟发行2026年记账式贴现（五十期）国债",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676362.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 14:57:20 +0800",
+      "publishedAtText": "08-12 14:57",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "吉林市锚定打造冰雪、碳纤维两大世界级产业基地",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676360.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 14:42:28 +0800",
+      "publishedAtText": "08-12 14:42",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "前7个月我国期货市场累计成交额同比增长38.43%",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676350.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 14:10:22 +0800",
+      "publishedAtText": "08-12 14:10",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "连续两个月突破100万辆 我国汽车出口延续强劲增长态势",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676344.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 14:01:23 +0800",
+      "publishedAtText": "08-12 14:01",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "2026“亚洲品牌500强”榜单将于9月在中国香港揭晓",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676331.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 13:50:56 +0800",
+      "publishedAtText": "08-12 13:50",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "第三届“辽超”拓展赛事功能 打造文体旅商融合消费新场景",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676330.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 13:47:44 +0800",
+      "publishedAtText": "08-12 13:47",
+      "impactTags": [
+        "消费"
+      ],
+      "impactedStocks": [
+        "贵州茅台",
+        "五粮液",
+        "中国中免"
+      ],
+      "impactNote": "可能影响：贵州茅台、五粮液、中国中免"
+    },
+    {
+      "title": "（乡村行·看振兴）山西襄垣：“企业+基地+农户”模式带旺乡村“甜蜜经济”",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676324.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 13:42:20 +0800",
+      "publishedAtText": "08-12 13:42",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "人民论坛网评|首发经济，“新鲜”之后更“长红”",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676296.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 13:39:02 +0800",
+      "publishedAtText": "08-12 13:39",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "好评中国 | “人工智能+”澎湃经济新浪潮",
+      "url": "https://www.chinanews.com.cn/cj/2026/08-12/10676302.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Wed, 12 Aug 2026 13:38:42 +0800",
+      "publishedAtText": "08-12 13:38",
       "impactTags": [
         "全A风险偏好"
       ],
