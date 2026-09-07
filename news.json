@@ -1,6 +1,38 @@
 {
-  "updatedAt": "2026-09-07T22:28:10.621611+08:00",
+  "updatedAt": "2026-09-08T00:29:45.666900+08:00",
   "items": [
+    {
+      "title": "中国央行连续22个月增持黄金 储备规模升至7673万盎司",
+      "url": "https://www.chinanews.com.cn/cj/2026/09-07/10692283.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Mon, 7 Sep 2026 22:26:59 +0800",
+      "publishedAtText": "09-07 22:26",
+      "impactTags": [
+        "黄金"
+      ],
+      "impactedStocks": [
+        "紫金矿业",
+        "山东黄金",
+        "赤峰黄金"
+      ],
+      "impactNote": "可能影响：紫金矿业、山东黄金、赤峰黄金"
+    },
+    {
+      "title": "中国提出到2030年全面建成覆盖完善、性能领先的新一代通信网",
+      "url": "https://www.chinanews.com.cn/cj/2026/09-07/10692282.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Mon, 7 Sep 2026 22:26:07 +0800",
+      "publishedAtText": "09-07 22:26",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
     {
       "title": "聚焦前沿科技与智能制造 台商台企在渝感受产业新动能",
       "url": "https://www.chinanews.com.cn/cj/2026/09-07/10692265.shtml",
@@ -279,38 +311,6 @@
       "source": "中新网财经新闻",
       "publishedAt": "Mon, 7 Sep 2026 19:05:51 +0800",
       "publishedAtText": "09-07 19:05",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "工信部印发《信息通信行业发展“十五五”规划》",
-      "url": "https://www.chinanews.com.cn/cj/2026/09-07/10692127.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Mon, 7 Sep 2026 19:03:47 +0800",
-      "publishedAtText": "09-07 19:03",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "六问+一图，读懂《信息通信行业发展“十五五”规划》",
-      "url": "https://www.chinanews.com.cn/cj/2026/09-07/10692135.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Mon, 7 Sep 2026 19:03:05 +0800",
-      "publishedAtText": "09-07 19:03",
       "impactTags": [
         "全A风险偏好"
       ],
