@@ -1,6 +1,22 @@
 {
-  "updatedAt": "2026-09-14T23:20:47.101719+08:00",
+  "updatedAt": "2026-09-15T01:01:12.999569+08:00",
   "items": [
+    {
+      "title": "从原创突破到产业应用 青年专家共话基础研究与未来产业",
+      "url": "https://www.chinanews.com.cn/cj/2026/09-14/10696470.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Mon, 14 Sep 2026 23:14:47 +0800",
+      "publishedAtText": "09-14 23:14",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
     {
       "title": "广州规划至2030年海洋生产总值突破7300亿元",
       "url": "https://www.chinanews.com.cn/cj/2026/09-14/10696430.shtml",
@@ -295,22 +311,6 @@
       "source": "中新网财经新闻",
       "publishedAt": "Mon, 14 Sep 2026 21:02:24 +0800",
       "publishedAtText": "09-14 21:02",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "8月末中国社会融资规模存量464.8万亿元 同比增7.2%",
-      "url": "https://www.chinanews.com.cn/cj/2026/09-14/10696368.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Mon, 14 Sep 2026 21:00:02 +0800",
-      "publishedAtText": "09-14 21:00",
       "impactTags": [
         "全A风险偏好"
       ],
