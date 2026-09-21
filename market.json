@@ -1,73 +1,71 @@
 {
-  "updatedAt": "2026-09-18T21:06:06.568497+08:00",
-  "updatedAtText": "21:06",
-  "tradingDate": "2026-09-18",
-  "tradingDateText": "2026年9月18日 周五",
-  "runDate": "2026-09-18",
+  "updatedAt": "2026-09-21T23:16:11.984381+08:00",
+  "updatedAtText": "23:16",
+  "tradingDate": "2026-09-21",
+  "tradingDateText": "2026年9月21日 周一",
+  "runDate": "2026-09-21",
   "marketStatus": "已收盘",
-  "turnoverText": "2.09万亿",
+  "turnoverText": "2.03万亿",
   "indices": [
     {
       "name": "上证指数",
       "symbol": "000001.SS",
       "source": "eastmoney",
-      "value": 3911.87,
-      "valueText": "3,911.87",
-      "change": 36.27,
-      "changePercent": 0.94,
-      "changeText": "+0.94%",
-      "previous": 3875.6,
-      "amountText": "9941.69亿",
+      "value": 3949.9068,
+      "valueText": "3,949.91",
+      "changePercent": 0.9723,
+      "changeText": "+0.97%",
+      "barDate": "2026-09-21",
+      "quoteSource": "sina",
       "sparkline": [
-        3900.35,
-        3940.04,
-        3966.59,
-        3934.09,
-        3946.68,
-        3926.96,
-        3927.18,
-        3982.65,
-        3990.3,
-        3894.42,
-        3903.72,
-        3905.2,
-        3882.01,
-        3889.44,
-        3912.52,
-        3956.57,
-        3952.18,
-        3986.3,
-        3979.89,
-        3941.39,
-        3942.09,
-        3930.12,
-        3932.7,
-        3940.55,
-        3951.51,
-        3934.4,
-        3888.11,
-        3885.33,
-        3864.28,
-        3891.6,
-        3875.6,
-        3911.87
+        3940.037,
+        3966.594,
+        3934.093,
+        3946.675,
+        3926.965,
+        3927.176,
+        3982.654,
+        3990.304,
+        3894.422,
+        3903.721,
+        3905.203,
+        3882.008,
+        3889.445,
+        3912.524,
+        3956.571,
+        3952.179,
+        3986.298,
+        3979.888,
+        3941.386,
+        3942.088,
+        3930.116,
+        3932.699,
+        3940.551,
+        3951.507,
+        3934.404,
+        3888.111,
+        3885.333,
+        3864.279,
+        3891.601,
+        3875.604,
+        3911.871,
+        3949.907,
+        3949.9068
       ],
       "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-21 23:16"
     },
     {
       "name": "上证50",
       "symbol": "000016.SS",
       "source": "eastmoney",
-      "value": 2860.77,
-      "valueText": "2,860.77",
-      "change": 16.54,
-      "changePercent": 0.58,
-      "changeText": "+0.58%",
-      "previous": 2844.23,
-      "amountText": "1383.66亿",
+      "value": 2886.6133,
+      "valueText": "2,886.61",
+      "changePercent": 0.9032,
+      "changeText": "+0.90%",
+      "barDate": "2026-09-21",
+      "quoteSource": "sina",
       "sparkline": [
-        2920.135,
         2960.424,
         2967.733,
         2929.929,
@@ -99,10 +97,11 @@
         2865.302,
         2844.233,
         2860.775,
-        2860.77
+        2886.613,
+        2886.6133
       ],
       "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-21 23:16"
     },
     {
       "name": "中证2000",
@@ -147,22 +146,22 @@
         3192.2065
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-18 21:06",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:06",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "中证500",
       "symbol": "000905.SS",
       "source": "eastmoney",
-      "value": 7799.61,
-      "valueText": "7,799.61",
-      "change": 144.63,
-      "changePercent": 1.89,
-      "changeText": "+1.89%",
-      "previous": 7654.98,
-      "amountText": "3704.58亿",
+      "value": 7850.48,
+      "valueText": "7,850.48",
+      "changePercent": 0.6522,
+      "changeText": "+0.65%",
+      "barDate": "2026-09-21",
+      "quoteSource": "sina",
       "sparkline": [
-        7829.362,
         7980.125,
         8030.948,
         7967.539,
@@ -194,24 +193,22 @@
         7683.47,
         7654.979,
         7799.613,
-        7799.61
+        7850.48
       ],
       "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-21 23:16"
     },
     {
       "name": "沪深300",
       "symbol": "000300.SS",
       "source": "eastmoney",
-      "value": 4507.39,
-      "valueText": "4,507.39",
-      "change": 47.23,
-      "changePercent": 1.06,
-      "changeText": "+1.06%",
-      "previous": 4460.16,
-      "amountText": "5376.99亿",
+      "value": 4539.5654,
+      "valueText": "4,539.57",
+      "changePercent": 0.7138,
+      "changeText": "+0.71%",
+      "barDate": "2026-09-21",
+      "quoteSource": "sina",
       "sparkline": [
-        4651.31,
         4694.437,
         4702.025,
         4663.789,
@@ -243,24 +240,23 @@
         4480.268,
         4460.156,
         4507.393,
-        4507.39
+        4539.565,
+        4539.5654
       ],
       "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-21 23:16"
     },
     {
       "name": "科创50",
       "symbol": "000688.SS",
       "source": "eastmoney",
-      "value": 1652.63,
-      "valueText": "1,652.63",
-      "change": 46.34,
-      "changePercent": 2.88,
-      "changeText": "+2.88%",
-      "previous": 1606.29,
-      "amountText": "1176.53亿",
+      "value": 1657.4846,
+      "valueText": "1,657.48",
+      "changePercent": 0.2937,
+      "changeText": "+0.29%",
+      "barDate": "2026-09-21",
+      "quoteSource": "sina",
       "sparkline": [
-        1701.292,
         1744.024,
         1737.774,
         1709.503,
@@ -292,24 +288,23 @@
         1616.186,
         1606.287,
         1652.631,
-        1652.63
+        1657.485,
+        1657.4846
       ],
       "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-21 23:16"
     },
     {
       "name": "创业板50",
       "symbol": "399673.SZ",
       "source": "eastmoney",
-      "value": 3507.84,
-      "valueText": "3,507.84",
-      "change": 78.58,
-      "changePercent": 2.29,
-      "changeText": "+2.29%",
-      "previous": 3429.26,
-      "amountText": "1710.00亿",
+      "value": 3538.467,
+      "valueText": "3,538.47",
+      "changePercent": 0.8732,
+      "changeText": "+0.87%",
+      "barDate": "2026-09-21",
+      "quoteSource": "sina",
       "sparkline": [
-        3703.043,
         3737.081,
         3690.907,
         3708.583,
@@ -341,10 +336,10 @@
         3446.019,
         3429.257,
         3507.838,
-        3507.84
+        3538.467
       ],
       "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-21 23:16"
     },
     {
       "name": "微盘股",
@@ -358,20 +353,22 @@
       "previous": 1874.82,
       "amountText": "177.16亿",
       "sparkline": [],
-      "stale": false,
-      "asOf": "2026-09-18 21:06"
+      "asOf": "2026-09-18 21:06",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:06",
+      "staleReason": "本次抓取失败，沿用上次数据"
     }
   ],
   "quickStats": [
     {
       "label": "上证指数",
-      "valueText": "+0.94%",
-      "changePercent": 0.94
+      "valueText": "+0.97%",
+      "changePercent": 0.9723
     },
     {
       "label": "上证50",
-      "valueText": "+0.58%",
-      "changePercent": 0.58
+      "valueText": "+0.90%",
+      "changePercent": 0.9032
     },
     {
       "label": "中证2000",
@@ -380,27 +377,27 @@
     },
     {
       "label": "中证500",
-      "valueText": "+1.89%",
-      "changePercent": 1.89
+      "valueText": "+0.65%",
+      "changePercent": 0.6522
     },
     {
       "label": "成交额",
-      "valueText": "2.09万亿",
+      "valueText": "2.03万亿",
       "color": "var(--ink)"
     },
     {
       "label": "上涨",
-      "valueText": "3937",
+      "valueText": "4535",
       "color": "var(--up)"
     },
     {
       "label": "下跌",
-      "valueText": "1109",
+      "valueText": "936",
       "color": "var(--down)"
     },
     {
       "label": "涨停",
-      "valueText": "78",
+      "valueText": "103",
       "color": "var(--up)"
     }
   ],
@@ -449,8 +446,10 @@
         51778.04
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "纳斯达克",
@@ -496,8 +495,10 @@
         26418.299
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "标普500",
@@ -543,8 +544,10 @@
         7637.76
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "日经225",
@@ -590,8 +593,10 @@
         65018.95
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "韩国KOSPI",
@@ -636,8 +641,10 @@
         6894.23
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "德国DAX",
@@ -683,8 +690,10 @@
         25405.52
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "法国CAC40",
@@ -730,8 +739,10 @@
         8084.65
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     },
     {
       "name": "离岸人民币",
@@ -776,200 +787,202 @@
         6.6984
       ],
       "barDate": "2026-09-18",
-      "stale": false,
-      "asOf": "2026-09-18 21:07"
+      "asOf": "2026-09-18 21:07",
+      "stale": true,
+      "staleFrom": "2026-09-18 21:07",
+      "staleReason": "本次抓取失败，沿用上次数据"
     }
   ],
   "styleMatrix": [
     {
       "label": "大盘 / 小票",
-      "value": "小票占优",
-      "score": 37,
-      "detail": "上证50等 +0.86% / 中证2000等 +1.43%"
+      "value": "大盘占优",
+      "score": 55,
+      "detail": "上证50等 +0.86% / 中证2000等 +0.65%"
     },
     {
       "label": "价值 / 成长",
-      "value": "成长占优",
-      "score": 17,
-      "detail": "上证50等 +0.82% / 科创50等 +2.31%"
+      "value": "价值占优",
+      "score": 55,
+      "detail": "上证50等 +0.81% / 科创50等 +0.58%"
     },
     {
       "label": "红利 / 科技",
-      "value": "科技占优",
-      "score": 8,
-      "detail": "上证50等 +0.58% / 科创50等 +2.58%"
+      "value": "红利占优",
+      "score": 57,
+      "detail": "上证50等 +0.90% / 科创50等 +0.58%"
     }
   ],
   "volumeAnalysis": {
-    "today": "2.09万亿",
-    "previous": "1.84万亿",
-    "change": "+13.96%",
-    "summary": "成交额采用新浪财经全A收盘样本合计，约 2.09万亿。若与交易所口径存在差异，以交易所正式披露为准。",
+    "today": "2.03万亿",
+    "previous": "2.08万亿",
+    "change": "-2.19%",
+    "summary": "近一个月沪深两市成交额按上证指数与深证成指日线成交额合并估算。放量上涨更利于趋势强势股延续，缩量上涨则等待回踩确认。",
     "bars": [
-      {
-        "date": "2026-08-18",
-        "label": "08-18",
-        "amount": 2419373574329.0,
-        "amountText": "2.42万亿",
-        "value": 95.65
-      },
-      {
-        "date": "2026-08-19",
-        "label": "08-19",
-        "amount": 2529325917959.0,
-        "amountText": "2.53万亿",
-        "value": 100.0
-      },
-      {
-        "date": "2026-08-20",
-        "label": "08-20",
-        "amount": 2093533933788.0,
-        "amountText": "2.09万亿",
-        "value": 82.77
-      },
       {
         "date": "2026-08-21",
         "label": "08-21",
-        "amount": 1891983264760.0,
-        "amountText": "1.89万亿",
-        "value": 74.8
+        "amount": 1879264405344.9,
+        "amountText": "1.88万亿",
+        "value": 88.19
       },
       {
         "date": "2026-08-24",
         "label": "08-24",
-        "amount": 2020907618718.0,
-        "amountText": "2.02万亿",
-        "value": 79.9
+        "amount": 2007456397338.53,
+        "amountText": "2.01万亿",
+        "value": 94.2
       },
       {
         "date": "2026-08-25",
         "label": "08-25",
-        "amount": 1843686069062.0,
-        "amountText": "1.84万亿",
-        "value": 72.89
+        "amount": 1831844459909.01,
+        "amountText": "1.83万亿",
+        "value": 85.96
       },
       {
         "date": "2026-08-26",
         "label": "08-26",
-        "amount": 1821418342968.0,
-        "amountText": "1.82万亿",
-        "value": 72.01
+        "amount": 1808723242719.83,
+        "amountText": "1.81万亿",
+        "value": 84.88
+      },
+      {
+        "date": "2026-08-27",
+        "label": "08-27",
+        "amount": 2125926799188.8198,
+        "amountText": "2.13万亿",
+        "value": 99.76
       },
       {
         "date": "2026-08-28",
         "label": "08-28",
-        "amount": 2140562927883.0,
-        "amountText": "2.14万亿",
-        "value": 84.63
+        "amount": 2101715024358.7002,
+        "amountText": "2.10万亿",
+        "value": 98.62
+      },
+      {
+        "date": "2026-08-31",
+        "label": "08-31",
+        "amount": 2131030144497.3298,
+        "amountText": "2.13万亿",
+        "value": 100.0
       },
       {
         "date": "2026-09-01",
         "label": "09-01",
-        "amount": 2145037232794.0,
-        "amountText": "2.15万亿",
-        "value": 84.81
+        "amount": 2033402822269.48,
+        "amountText": "2.03万亿",
+        "value": 95.42
       },
       {
         "date": "2026-09-02",
         "label": "09-02",
-        "amount": 1819769854257.0,
-        "amountText": "1.82万亿",
-        "value": 71.95
+        "amount": 1791178494595.53,
+        "amountText": "1.79万亿",
+        "value": 84.05
       },
       {
         "date": "2026-09-03",
         "label": "09-03",
-        "amount": 1779946121462.0,
-        "amountText": "1.78万亿",
-        "value": 70.37
+        "amount": 1758916323802.69,
+        "amountText": "1.76万亿",
+        "value": 82.54
       },
       {
         "date": "2026-09-04",
         "label": "09-04",
-        "amount": 2050772500633.0,
-        "amountText": "2.05万亿",
-        "value": 81.08
+        "amount": 2030667836097.55,
+        "amountText": "2.03万亿",
+        "value": 95.29
       },
       {
         "date": "2026-09-07",
         "label": "09-07",
-        "amount": 1963772933937.0,
-        "amountText": "1.96万亿",
-        "value": 77.64
+        "amount": 1946018893712.63,
+        "amountText": "1.95万亿",
+        "value": 91.32
       },
       {
         "date": "2026-09-08",
         "label": "09-08",
-        "amount": 1963772933937.0,
+        "amount": 1960334669031.19,
         "amountText": "1.96万亿",
-        "value": 77.64
+        "value": 91.99
       },
       {
         "date": "2026-09-09",
         "label": "09-09",
-        "amount": 1872759350176.0,
-        "amountText": "1.87万亿",
-        "value": 74.04
+        "amount": 1855606640262.48,
+        "amountText": "1.86万亿",
+        "value": 87.08
       },
       {
         "date": "2026-09-10",
         "label": "09-10",
-        "amount": 1661968218164.0,
-        "amountText": "1.66万亿",
-        "value": 65.71
+        "amount": 1647147829484.9,
+        "amountText": "1.65万亿",
+        "value": 77.29
       },
       {
         "date": "2026-09-11",
         "label": "09-11",
-        "amount": 1986586920878.0,
-        "amountText": "1.99万亿",
-        "value": 78.54
+        "amount": 1971898487729.85,
+        "amountText": "1.97万亿",
+        "value": 92.53
       },
       {
         "date": "2026-09-14",
         "label": "09-14",
-        "amount": 1642804098071.0,
-        "amountText": "1.64万亿",
-        "value": 64.95
+        "amount": 1629175552004.94,
+        "amountText": "1.63万亿",
+        "value": 76.45
       },
       {
         "date": "2026-09-15",
         "label": "09-15",
-        "amount": 1642804098071.0,
-        "amountText": "1.64万亿",
-        "value": 64.95
+        "amount": 1612716789831.02,
+        "amountText": "1.61万亿",
+        "value": 75.68
       },
       {
         "date": "2026-09-16",
         "label": "09-16",
-        "amount": 1852207757375.0,
-        "amountText": "1.85万亿",
-        "value": 73.23
+        "amount": 1839121873617.53,
+        "amountText": "1.84万亿",
+        "value": 86.3
       },
       {
         "date": "2026-09-17",
         "label": "09-17",
-        "amount": 1836352715987.0,
-        "amountText": "1.84万亿",
-        "value": 72.6
+        "amount": 1823134270447.29,
+        "amountText": "1.82万亿",
+        "value": 85.55
       },
       {
         "date": "2026-09-18",
         "label": "09-18",
-        "amount": 2092632855050.0,
-        "amountText": "2.09万亿",
-        "value": 82.73
+        "amount": 2077100295691.3599,
+        "amountText": "2.08万亿",
+        "value": 97.47
+      },
+      {
+        "date": "2026-09-21",
+        "label": "09-21",
+        "amount": 2031513487711.89,
+        "amountText": "2.03万亿",
+        "value": 95.33
       }
     ],
-    "sampleDate": "2026-09-18 收盘"
+    "sampleDate": "2026-09-21 收盘"
   },
   "hotSectors": [
     {
       "rank": 1,
       "name": "其他医疗服务",
-      "strength": 83.6,
-      "changeText": "+6.72%",
-      "reason": "板块涨幅 +6.72%，领涨股 南华生物 +10.00%。",
+      "strength": 89.85,
+      "changeText": "+7.97%",
+      "reason": "板块涨幅 +7.97%，领涨股 南华生物 +9.99%。",
       "leaders": [
         "南华生物",
         "成交额前排",
@@ -979,131 +992,131 @@
     {
       "rank": 2,
       "name": "房产租赁经纪",
-      "strength": 74.3,
-      "changeText": "+4.86%",
-      "reason": "板块涨幅 +4.86%，领涨股 世联行 +9.89%。",
+      "strength": 86.75,
+      "changeText": "+7.35%",
+      "reason": "板块涨幅 +7.35%，领涨股 我爱我家 +10.00%。",
       "leaders": [
-        "世联行",
+        "我爱我家",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 3,
-      "name": "半导体设备",
-      "strength": 74.15,
-      "changeText": "+4.83%",
-      "reason": "板块涨幅 +4.83%，领涨股 托伦斯 +20.00%。",
+      "name": "会展服务",
+      "strength": 85.9,
+      "changeText": "+7.18%",
+      "reason": "板块涨幅 +7.18%，领涨股 锋尚文化 +12.80%。",
       "leaders": [
-        "托伦斯",
-        "北方华创",
-        "中芯国际"
+        "锋尚文化",
+        "成交额前排",
+        "趋势核心股"
       ]
     },
     {
       "rank": 4,
-      "name": "数字芯片设计",
-      "strength": 73.4,
-      "changeText": "+4.68%",
-      "reason": "板块涨幅 +4.68%，领涨股 诚邦股份 +10.02%。",
+      "name": "宠物食品",
+      "strength": 83.05,
+      "changeText": "+6.61%",
+      "reason": "板块涨幅 +6.61%，领涨股 乖宝宠物 +11.00%。",
       "leaders": [
-        "诚邦股份",
+        "乖宝宠物",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 5,
-      "name": "集成电路制造",
-      "strength": 72.95,
-      "changeText": "+4.59%",
-      "reason": "板块涨幅 +4.59%，领涨股 盛合晶微 +7.11%。",
+      "name": "防水材料",
+      "strength": 80.7,
+      "changeText": "+6.14%",
+      "reason": "板块涨幅 +6.14%，领涨股 科顺股份 +8.14%。",
       "leaders": [
-        "盛合晶微",
+        "科顺股份",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 6,
-      "name": "光伏加工设备",
-      "strength": 72.6,
-      "changeText": "+4.52%",
-      "reason": "板块涨幅 +4.52%，领涨股 拉普拉斯 +11.26%。",
+      "name": "涂料",
+      "strength": 79.2,
+      "changeText": "+5.84%",
+      "reason": "板块涨幅 +5.84%，领涨股 三棵树 +7.62%。",
       "leaders": [
-        "拉普拉斯",
+        "三棵树",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 7,
-      "name": "分立器件",
-      "strength": 72.3,
-      "changeText": "+4.46%",
-      "reason": "板块涨幅 +4.46%，领涨股 东微半导 +15.16%。",
+      "name": "其他家电Ⅲ",
+      "strength": 78.6,
+      "changeText": "+5.72%",
+      "reason": "板块涨幅 +5.72%，领涨股 奥佳华 +10.04%。",
       "leaders": [
-        "东微半导",
+        "奥佳华",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 8,
-      "name": "集成电路封测",
-      "strength": 72.15,
-      "changeText": "+4.43%",
-      "reason": "板块涨幅 +4.43%，领涨股 华天科技 +10.01%。",
+      "name": "其他家电Ⅱ",
+      "strength": 78.6,
+      "changeText": "+5.72%",
+      "reason": "板块涨幅 +5.72%，领涨股 奥佳华 +10.04%。",
       "leaders": [
-        "华天科技",
+        "奥佳华",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 9,
-      "name": "模拟芯片设计",
-      "strength": 72.1,
-      "changeText": "+4.42%",
-      "reason": "板块涨幅 +4.42%，领涨股 博通集成 +10.00%。",
+      "name": "诊断服务",
+      "strength": 78.0,
+      "changeText": "+5.60%",
+      "reason": "板块涨幅 +5.60%，领涨股 迪安诊断 +7.47%。",
       "leaders": [
-        "博通集成",
+        "迪安诊断",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 10,
-      "name": "半导体",
-      "strength": 71.75,
-      "changeText": "+4.35%",
-      "reason": "板块涨幅 +4.35%，领涨股 博通集成 +10.00%。",
+      "name": "医疗研发外包",
+      "strength": 76.35,
+      "changeText": "+5.27%",
+      "reason": "板块涨幅 +5.27%，领涨股 百花医药 +10.04%。",
       "leaders": [
-        "博通集成",
-        "北方华创",
-        "中芯国际"
+        "百花医药",
+        "成交额前排",
+        "趋势核心股"
       ]
     },
     {
       "rank": 11,
-      "name": "资产管理",
-      "strength": 71.55,
-      "changeText": "+4.31%",
-      "reason": "板块涨幅 +4.31%，领涨股 华金资本 +10.02%。",
+      "name": "医疗服务",
+      "strength": 76.05,
+      "changeText": "+5.21%",
+      "reason": "板块涨幅 +5.21%，领涨股 南华生物 +9.99%。",
       "leaders": [
-        "华金资本",
+        "南华生物",
         "成交额前排",
         "趋势核心股"
       ]
     },
     {
       "rank": 12,
-      "name": "诊断服务",
-      "strength": 69.85,
-      "changeText": "+3.97%",
-      "reason": "板块涨幅 +3.97%，领涨股 华大基因 +6.41%。",
+      "name": "视频媒体",
+      "strength": 76.0,
+      "changeText": "+5.20%",
+      "reason": "板块涨幅 +5.20%，领涨股 芒果超媒 +5.20%。",
       "leaders": [
-        "华大基因",
+        "芒果超媒",
         "成交额前排",
         "趋势核心股"
       ]
@@ -1111,141 +1124,147 @@
   ],
   "fundFlows": [
     {
-      "name": "电子",
-      "valueText": "198.54亿",
+      "name": "化学制药",
+      "valueText": "39.42亿",
       "direction": "up",
-      "summary": "主力净流入占比 +3.06%，板块涨幅 +2.81%。"
+      "summary": "行业资金净额 39.42亿（流入 176.21亿／流出 136.79亿），板块涨幅 +4.67%。"
     },
     {
-      "name": "半导体",
-      "valueText": "182.20亿",
+      "name": "房地产",
+      "valueText": "25.73亿",
       "direction": "up",
-      "summary": "主力净流入占比 +5.46%，板块涨幅 +4.35%。"
+      "summary": "行业资金净额 25.73亿（流入 104.77亿／流出 79.04亿），板块涨幅 +3.68%。"
     },
     {
-      "name": "数字芯片设计",
-      "valueText": "75.35亿",
+      "name": "证券",
+      "valueText": "18.80亿",
       "direction": "up",
-      "summary": "主力净流入占比 +5.65%，板块涨幅 +4.68%。"
+      "summary": "行业资金净额 18.80亿（流入 84.31亿／流出 65.51亿），板块涨幅 +1.41%。"
     },
     {
-      "name": "通信网络设备及器件",
-      "valueText": "67.53亿",
+      "name": "生物制品",
+      "valueText": "15.45亿",
       "direction": "up",
-      "summary": "主力净流入占比 +5.79%，板块涨幅 +2.86%。"
+      "summary": "行业资金净额 15.45亿（流入 72.97亿／流出 57.52亿），板块涨幅 +4.64%。"
     },
     {
-      "name": "集成电路封测",
-      "valueText": "50.83亿",
+      "name": "银行",
+      "valueText": "13.42亿",
       "direction": "up",
-      "summary": "主力净流入占比 +14.80%，板块涨幅 +4.43%。"
+      "summary": "行业资金净额 13.42亿（流入 85.96亿／流出 72.54亿），板块涨幅 +0.21%。"
     },
     {
-      "name": "通信设备",
-      "valueText": "46.28亿",
+      "name": "医疗服务",
+      "valueText": "13.40亿",
       "direction": "up",
-      "summary": "主力净流入占比 +2.45%，板块涨幅 +2.15%。"
+      "summary": "行业资金净额 13.40亿（流入 141.91亿／流出 128.51亿），板块涨幅 +5.10%。"
     },
     {
-      "name": "通信",
-      "valueText": "46.00亿",
+      "name": "军工装备",
+      "valueText": "13.31亿",
       "direction": "up",
-      "summary": "主力净流入占比 +2.32%，板块涨幅 +1.81%。"
+      "summary": "行业资金净额 13.31亿（流入 117.69亿／流出 104.38亿），板块涨幅 +1.95%。"
     },
     {
-      "name": "机械设备",
-      "valueText": "39.58亿",
+      "name": "中药",
+      "valueText": "11.68亿",
       "direction": "up",
-      "summary": "主力净流入占比 +2.43%，板块涨幅 +1.93%。"
+      "summary": "行业资金净额 11.68亿（流入 43.20亿／流出 31.52亿），板块涨幅 +3.26%。"
     },
     {
-      "name": "电力设备",
-      "valueText": "33.12亿",
+      "name": "煤炭开采加工",
+      "valueText": "11.35亿",
       "direction": "up",
-      "summary": "主力净流入占比 +2.27%，板块涨幅 +2.10%。"
+      "summary": "行业资金净额 11.35亿（流入 40.18亿／流出 28.83亿），板块涨幅 +2.39%。"
     },
     {
-      "name": "计算机",
-      "valueText": "31.75亿",
+      "name": "互联网电商",
+      "valueText": "10.42亿",
       "direction": "up",
-      "summary": "主力净流入占比 +3.33%，板块涨幅 +1.90%。"
+      "summary": "行业资金净额 10.42亿（流入 31.71亿／流出 21.30亿），板块涨幅 +1.74%。"
     }
   ],
   "valuations": [
     {
       "name": "上证50",
-      "pe": "10.62x",
-      "peValue": 10.62,
-      "pePercentile": 48.3,
-      "pePercentile10y": 48.3,
-      "pb": "1.22x",
-      "pbValue": 1.22,
-      "pbPercentile": 28.7,
-      "pbPercentile10y": 28.7,
-      "asOf": "2026-09-18",
-      "percentile": "中位附近（48.3%）",
+      "pe": "10.72x",
+      "peValue": 10.72,
+      "pePercentile": 49.8,
+      "pePercentile10y": 49.8,
+      "pb": "1.23x",
+      "pbValue": 1.23,
+      "pbPercentile": 32.6,
+      "pbPercentile10y": 32.6,
+      "asOf": "2026-09-21",
+      "percentile": "中位附近（49.8%）",
       "source": "乐咕乐股指数估值（akshare stock_index_pe_lg / pb_lg）"
     },
     {
       "name": "沪深300",
-      "pe": "12.68x",
-      "peValue": 12.68,
-      "pePercentile": 53.1,
-      "pePercentile10y": 53.1,
-      "pb": "1.40x",
-      "pbValue": 1.4,
-      "pbPercentile": 27.1,
-      "pbPercentile10y": 27.1,
-      "asOf": "2026-09-18",
-      "percentile": "中位附近（53.1%）",
+      "pe": "12.77x",
+      "peValue": 12.77,
+      "pePercentile": 55.0,
+      "pePercentile10y": 55.0,
+      "pb": "1.42x",
+      "pbValue": 1.42,
+      "pbPercentile": 29.1,
+      "pbPercentile10y": 29.1,
+      "asOf": "2026-09-21",
+      "percentile": "中位附近（55.0%）",
       "source": "乐咕乐股指数估值（akshare stock_index_pe_lg / pb_lg）"
     },
     {
       "name": "中证500",
-      "pe": "27.10x",
-      "peValue": 27.1,
-      "pePercentile": 59.1,
-      "pb": "2.40x",
-      "pbValue": 2.4,
-      "pbPercentile": 54.9,
-      "asOf": "2026-09-18",
-      "percentile": "中位附近（59.1%）",
+      "pe": "27.30x",
+      "peValue": 27.3,
+      "pePercentile": 60.3,
+      "pb": "2.42x",
+      "pbValue": 2.42,
+      "pbPercentile": 55.3,
+      "asOf": "2026-09-21",
+      "percentile": "中位偏上（60.3%）",
       "source": "乐咕乐股指数估值（akshare stock_index_pe_lg / pb_lg）"
     },
     {
       "name": "中证1000",
-      "pe": "30.26x",
-      "peValue": 30.26,
-      "pePercentile": 59.7,
-      "pb": "2.43x",
-      "pbValue": 2.43,
-      "pbPercentile": 44.4,
-      "asOf": "2026-09-18",
-      "percentile": "中位附近（59.7%）",
+      "pe": "30.52x",
+      "peValue": 30.52,
+      "pePercentile": 61.8,
+      "pb": "2.45x",
+      "pbValue": 2.45,
+      "pbPercentile": 46.5,
+      "asOf": "2026-09-21",
+      "percentile": "中位偏上（61.8%）",
+      "source": "乐咕乐股指数估值（akshare stock_index_pe_lg / pb_lg）"
+    },
+    {
+      "name": "创业板50",
+      "pe": "31.08x",
+      "peValue": 31.08,
+      "pePercentile": 17.6,
+      "pb": "6.09x",
+      "pbValue": 6.09,
+      "pbPercentile": 60.3,
+      "asOf": "2026-09-21",
+      "percentile": "低分位（17.6%）",
       "source": "乐咕乐股指数估值（akshare stock_index_pe_lg / pb_lg）"
     }
   ],
   "sentiment": {
-    "upCount": "3937",
-    "downCount": "1109",
-    "limitUp": "78",
-    "limitDown": "0",
-    "consecutiveBoards": "最高4板，2板以上12只",
-    "breakRate": "24.3%",
-    "sampleDate": "2026-08-18 收盘",
-    "summary": "全 A 上涨 3937 家、下跌 1109 家；涨停 78 家、跌停 0 家；最高4板，2板以上12只；炸板率 24.3%。涨停/跌停采用东方财富涨停股池口径。",
+    "upCount": "4535",
+    "downCount": "936",
+    "limitUp": "103",
+    "limitDown": "2",
+    "consecutiveBoards": "最高5板，2板以上21只",
+    "breakRate": "19.5%",
+    "sampleDate": "2026-09-21 收盘",
+    "summary": "全 A 上涨 4535 家、下跌 936 家；涨停 103 家、跌停 2 家；最高5板，2板以上21只；炸板率 19.5%。涨停/跌停采用东方财富涨停股池口径。",
     "sources": [
       "新浪财经全A收盘样本",
       "东方财富行情复核",
       "同花顺热股复核"
     ],
     "history": [
-      {
-        "date": "2026-08-14",
-        "label": "08-14",
-        "value": 55,
-        "tag": "修复"
-      },
       {
         "date": "2026-08-17",
         "label": "08-17",
@@ -1383,224 +1402,223 @@
         "label": "09-18",
         "value": 78,
         "tag": "亢奋"
+      },
+      {
+        "date": "2026-09-21",
+        "label": "09-21",
+        "value": 76,
+        "tag": "活跃"
       }
     ],
-    "breakRateValue": 24.3,
-    "maxBoard": 4,
-    "multiBoard": 12,
+    "breakRateValue": 19.5,
+    "maxBoard": 5,
+    "multiBoard": 21,
     "boardLadder": {
-      "1": 66,
-      "2": 8,
-      "3": 2,
-      "4": 2
+      "1": 82,
+      "2": 13,
+      "3": 5,
+      "4": 2,
+      "5": 1
     },
     "limitUpLeaders": [
       {
         "name": "华瓷股份",
         "code": "001216",
-        "board": 4,
+        "board": 5,
         "sector": "家居用品"
-      },
-      {
-        "name": "锡华科技",
-        "code": "603248",
-        "board": 4,
-        "sector": "风电设备"
       },
       {
         "name": "内蒙新华",
         "code": "603230",
-        "board": 3,
+        "board": 4,
         "sector": "出版"
       },
       {
         "name": "世联行",
         "code": "002285",
-        "board": 3,
+        "board": 4,
         "sector": "房地产服"
+      },
+      {
+        "name": "南华生物",
+        "code": "000504",
+        "board": 3,
+        "sector": "医疗服务"
+      },
+      {
+        "name": "龙头股份",
+        "code": "600630",
+        "board": 3,
+        "sector": "服装家纺"
       },
       {
         "name": "华软科技",
         "code": "002453",
-        "board": 2,
+        "board": 3,
         "sector": "化学制品"
-      },
-      {
-        "name": "经纬股份",
-        "code": "301390",
-        "board": 2,
-        "sector": "工程咨询"
       }
     ],
     "brokenBoard": 25,
     "limitCaliber": "东方财富涨停股池口径",
-    "limitSampleDate": "20260918"
+    "limitSampleDate": "20260921"
   },
   "lhb": [
     {
+      "code": "002631",
+      "name": "德尔未来",
+      "date": "2026-09-21",
+      "reason": "3家机构买入，成功率38.53%",
+      "changeText": "+6.88%",
+      "netAmountText": "1.40亿"
+    },
+    {
+      "code": "002774",
+      "name": "快意电梯",
+      "date": "2026-09-21",
+      "reason": "4家机构卖出，成功率11.11%",
+      "changeText": "-6.48%",
+      "netAmountText": "-8848.95万"
+    },
+    {
       "code": "003001",
       "name": "中岩大地",
-      "date": "2026-09-18",
-      "reason": "2家机构卖出，成功率38.41%",
-      "changeText": "-1.57%",
-      "netAmountText": "-584.34万"
-    },
-    {
-      "code": "002980",
-      "name": "华盛昌",
-      "date": "2026-09-18",
-      "reason": "2家机构买入，成功率34.47%",
-      "changeText": "+10.00%",
-      "netAmountText": "1.85亿"
-    },
-    {
-      "code": "002902",
-      "name": "铭普光磁",
-      "date": "2026-09-18",
-      "reason": "主力做T，成功率44.82%",
-      "changeText": "+7.00%",
-      "netAmountText": "2.69亿"
-    },
-    {
-      "code": "002836",
-      "name": "新宏泽",
-      "date": "2026-09-18",
-      "reason": "2家机构买入，成功率16.03%",
-      "changeText": "+9.96%",
-      "netAmountText": "-473.89万"
+      "date": "2026-09-21",
+      "reason": "4家机构买入，成功率39.77%",
+      "changeText": "+4.40%",
+      "netAmountText": "4279.67万"
     },
     {
       "code": "003026",
       "name": "中晶科技",
-      "date": "2026-09-18",
-      "reason": "4家机构买入，成功率18.18%",
-      "changeText": "+0.54%",
-      "netAmountText": "-8640.41万"
+      "date": "2026-09-21",
+      "reason": "4家机构买入，成功率21.17%",
+      "changeText": "+1.85%",
+      "netAmountText": "-1999.58万"
     },
     {
-      "code": "002631",
-      "name": "德尔未来",
-      "date": "2026-09-18",
-      "reason": "2家机构买入，成功率40.12%",
-      "changeText": "+9.98%",
-      "netAmountText": "5886.73万"
+      "code": "002285",
+      "name": "世联行",
+      "date": "2026-09-21",
+      "reason": "主力做T，成功率37.97%",
+      "changeText": "+10.03%",
+      "netAmountText": "2623.01万"
     },
     {
-      "code": "002528",
-      "name": "*ST英飞",
-      "date": "2026-09-18",
-      "reason": "主力做T，成功率29.03%",
-      "changeText": "-10.03%",
-      "netAmountText": "-7146.95万"
+      "code": "002792",
+      "name": "通宇通讯",
+      "date": "2026-09-21",
+      "reason": "2家机构买入，成功率39.78%",
+      "changeText": "+10.00%",
+      "netAmountText": "1.17亿"
+    },
+    {
+      "code": "002980",
+      "name": "华盛昌",
+      "date": "2026-09-21",
+      "reason": "3家机构卖出，成功率10.26%",
+      "changeText": "-7.48%",
+      "netAmountText": "-2.88亿"
+    },
+    {
+      "code": "002585",
+      "name": "双星新材",
+      "date": "2026-09-21",
+      "reason": "2家机构买入，成功率42.79%",
+      "changeText": "+10.04%",
+      "netAmountText": "8770.40万"
     },
     {
       "code": "002584",
       "name": "西陇科学",
-      "date": "2026-09-18",
-      "reason": "3家机构买入，成功率35.68%",
-      "changeText": "+2.42%",
-      "netAmountText": "2675.39万"
+      "date": "2026-09-21",
+      "reason": "3家机构买入，成功率24.43%",
+      "changeText": "+0.10%",
+      "netAmountText": "3861.38万"
     },
     {
-      "code": "002185",
-      "name": "华天科技",
-      "date": "2026-09-18",
-      "reason": "1家机构买入，成功率42.33%",
+      "code": "002528",
+      "name": "*ST英飞",
+      "date": "2026-09-21",
+      "reason": "主力做T，成功率29.61%",
+      "changeText": "-10.06%",
+      "netAmountText": "-5063.42万"
+    },
+    {
+      "code": "002836",
+      "name": "新宏泽",
+      "date": "2026-09-21",
+      "reason": "2家机构买入，成功率37.13%",
+      "changeText": "+0.50%",
+      "netAmountText": "-4599.07万"
+    },
+    {
+      "code": "003013",
+      "name": "地铁设计",
+      "date": "2026-09-21",
+      "reason": "主力做T，成功率18.56%",
+      "changeText": "-10.02%",
+      "netAmountText": "-1.13亿"
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "date": "2026-09-21",
+      "reason": "1家机构买入，成功率45.99%",
+      "changeText": "+10.00%",
+      "netAmountText": "5.55亿"
+    },
+    {
+      "code": "001317",
+      "name": "三羊马",
+      "date": "2026-09-21",
+      "reason": "5家机构买入，成功率38.46%",
+      "changeText": "+10.00%",
+      "netAmountText": "4650.25万"
+    },
+    {
+      "code": "001216",
+      "name": "华瓷股份",
+      "date": "2026-09-21",
+      "reason": "主力做T，成功率39.67%",
       "changeText": "+10.01%",
-      "netAmountText": "8.18亿"
-    },
-    {
-      "code": "000002",
-      "name": "万科A",
-      "date": "2026-09-18",
-      "reason": "2家机构买入，成功率43.55%",
-      "changeText": "+9.93%",
-      "netAmountText": "5.25亿"
-    },
-    {
-      "code": "000978",
-      "name": "桂林旅游",
-      "date": "2026-09-18",
-      "reason": "3家机构买入，成功率37.22%",
-      "changeText": "+4.89%",
-      "netAmountText": "9300.49万"
-    },
-    {
-      "code": "002360",
-      "name": "ST同德",
-      "date": "2026-09-18",
-      "reason": "主力做T，成功率42.22%",
-      "changeText": "-8.58%",
-      "netAmountText": "-774.34万"
-    },
-    {
-      "code": "002531",
-      "name": "天顺风能",
-      "date": "2026-09-18",
-      "reason": "3家机构卖出，成功率24.39%",
-      "changeText": "-5.63%",
-      "netAmountText": "-9358.03万"
-    },
-    {
-      "code": "001365",
-      "name": "天海电子",
-      "date": "2026-09-18",
-      "reason": "1家机构买入，成功率35.25%",
-      "changeText": "+2.16%",
-      "netAmountText": "-2407.04万"
-    },
-    {
-      "code": "001399",
-      "name": "惠科股份",
-      "date": "2026-09-18",
-      "reason": "普通席位买入，成功率49.18%",
-      "changeText": "+10.02%",
-      "netAmountText": "4.19亿"
-    },
-    {
-      "code": "002453",
-      "name": "华软科技",
-      "date": "2026-09-18",
-      "reason": "1家机构买入，成功率16.55%",
-      "changeText": "+10.10%",
-      "netAmountText": "-2497.76万"
+      "netAmountText": "362.37万"
     }
   ],
   "fetchStatus": {
     "indices": {
-      "state": "live",
-      "detail": "",
-      "source": "东财 push2delay.eastmoney.com×7、Yahoo×1"
+      "state": "partial",
+      "detail": "未取得最新数据：中证2000、微盘股",
+      "source": "新浪 hq×6，其余沿用上次"
     },
     "globalMarkets": {
-      "state": "live",
-      "detail": "",
-      "source": "Yahoo×8"
+      "state": "stale",
+      "detail": "未取得最新数据：道琼斯、纳斯达克、标普500、日经225、韩国KOSPI、德国DAX、法国CAC40、离岸人民币",
+      "source": "previous"
     },
     "volumeAnalysis": {
       "state": "live",
-      "detail": "eastmoney 失败，改用新浪快照",
-      "source": "新浪全A快照"
+      "detail": "",
+      "source": "eastmoney K线"
     },
     "hotSectors": {
       "state": "live",
       "detail": "",
-      "source": "东财 push2delay.eastmoney.com 板块涨幅"
+      "source": "东财 push2.eastmoney.com 板块涨幅"
     },
     "fundFlows": {
       "state": "live",
-      "detail": "",
-      "source": "东财 push2delay.eastmoney.com 资金流向"
+      "detail": "东财 push2delay.eastmoney.com/push2.eastmoney.com 均不可用（HTTP Error 502: Bad Gateway）",
+      "source": "同花顺行业资金流（东财全挂）"
     },
     "valuations": {
-      "state": "partial",
-      "detail": "创业板50: AttributeError",
+      "state": "live",
+      "detail": "",
       "source": "乐咕乐股指数估值"
     },
     "sentiment": {
       "state": "live",
-      "detail": "",
-      "source": "东财 push2delay.eastmoney.com 全A快照"
+      "detail": "eastmoney 失败，改用新浪全A快照",
+      "source": "新浪全A快照"
     },
     "limitEcosystem": {
       "state": "live",
