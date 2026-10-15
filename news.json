@@ -1,28 +1,12 @@
 {
-  "updatedAt": "2026-10-14T00:18:43.811928+08:00",
+  "updatedAt": "2026-10-15T21:41:36.045030+08:00",
   "items": [
     {
-      "title": "韩国KOSPI指数收跌超5% 两大半导体股延续跌势",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714095.shtml",
+      "title": "（经济观察）中国储能携手全球共筑零碳未来 从“产品出海”到“生态共赢”",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715304.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 23:46:09 +0800",
-      "publishedAtText": "10-13 23:46",
-      "impactTags": [
-        "半导体"
-      ],
-      "impactedStocks": [
-        "北方华创",
-        "中芯国际",
-        "寒武纪"
-      ],
-      "impactNote": "可能影响：北方华创、中芯国际、寒武纪"
-    },
-    {
-      "title": "2025年欧盟进口纯电动汽车逾四成来自中国",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714093.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 23:11:05 +0800",
-      "publishedAtText": "10-13 23:11",
+      "publishedAt": "Thu, 15 Oct 2026 21:36:11 +0800",
+      "publishedAtText": "10-15 21:36",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -34,155 +18,30 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "中国科技企业华为：未来10年逻辑折叠技术具备持续演进空间",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714086.shtml",
+      "title": "香港金管局出台AI监管框架 推动银行业负责任运用AI",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715300.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 23:01:40 +0800",
-      "publishedAtText": "10-13 23:01",
+      "publishedAt": "Thu, 15 Oct 2026 21:32:21 +0800",
+      "publishedAtText": "10-15 21:32",
       "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "“2026天下甬商家乡行”在宁波启幕 甬港协同成势",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714083.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 22:59:56 +0800",
-      "publishedAtText": "10-13 22:59",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "浙江交通观察：高速“穿针引线”催热“桂花经济”",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714080.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 22:51:54 +0800",
-      "publishedAtText": "10-13 22:51",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "雄安新区首单“保税+TIR”业务启运",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714074.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 22:45:34 +0800",
-      "publishedAtText": "10-13 22:45",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "京津冀首趟“一单制”国际铁公联运班列石家庄首发",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714073.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 22:42:13 +0800",
-      "publishedAtText": "10-13 22:42",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "成渝中线高铁动走线跨沙河特大桥顺利合龙",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714064.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 22:12:02 +0800",
-      "publishedAtText": "10-13 22:12",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "美国俄勒冈州临时众议长：天津港经验值得借鉴",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714057.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:59:59 +0800",
-      "publishedAtText": "10-13 21:59",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "全球首个标准垂域大模型“同道”宣布升级",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714056.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:57:45 +0800",
-      "publishedAtText": "10-13 21:57",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "上海银行业跨境金融提质增效 助力国际金融中心能级提升",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714052.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:56:11 +0800",
-      "publishedAtText": "10-13 21:56",
-      "impactTags": [
+        "AI",
         "银行"
       ],
       "impactedStocks": [
-        "招商银行",
-        "工商银行",
-        "农业银行"
+        "工业富联",
+        "中际旭创",
+        "新易盛",
+        "寒武纪",
+        "招商银行"
       ],
-      "impactNote": "可能影响：招商银行、工商银行、农业银行"
+      "impactNote": "可能影响：工业富联、中际旭创、新易盛、寒武纪、招商银行"
     },
     {
-      "title": "广州白云边检推出系列服务保障措施护航广交会",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714050.shtml",
+      "title": "第十一届中国航空创新创业大赛在南通举行",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715293.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:52:57 +0800",
-      "publishedAtText": "10-13 21:52",
+      "publishedAt": "Thu, 15 Oct 2026 21:29:03 +0800",
+      "publishedAtText": "10-15 21:29",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -194,43 +53,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "褪去“阳春白雪”滤镜：葡萄酒拥抱市井烟火与年轻消费浪潮",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714049.shtml",
+      "title": "2026人工智能产业大会在山东济南开幕",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715292.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:52:53 +0800",
-      "publishedAtText": "10-13 21:52",
-      "impactTags": [
-        "消费"
-      ],
-      "impactedStocks": [
-        "贵州茅台",
-        "五粮液",
-        "中国中免"
-      ],
-      "impactNote": "可能影响：贵州茅台、五粮液、中国中免"
-    },
-    {
-      "title": "山西推动商贸服务业扩能提质 让消费更惠及民生",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714032.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:49:55 +0800",
-      "publishedAtText": "10-13 21:49",
-      "impactTags": [
-        "消费"
-      ],
-      "impactedStocks": [
-        "贵州茅台",
-        "五粮液",
-        "中国中免"
-      ],
-      "impactNote": "可能影响：贵州茅台、五粮液、中国中免"
-    },
-    {
-      "title": "山西举办标准化试点示范创建成果交流活动 拉开2026年世界标准日系列宣传序幕",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714031.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:49:51 +0800",
-      "publishedAtText": "10-13 21:49",
+      "publishedAt": "Thu, 15 Oct 2026 21:28:51 +0800",
+      "publishedAtText": "10-15 21:28",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -242,11 +69,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "宁夏葡萄酒推行“一瓶一码” 扫码读懂葡萄酒“完整一生”",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714030.shtml",
+      "title": "2026动物福利与可持续农食大会在北京开幕 助力中非农业合作",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715281.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:46:30 +0800",
-      "publishedAtText": "10-13 21:46",
+      "publishedAt": "Thu, 15 Oct 2026 20:43:33 +0800",
+      "publishedAtText": "10-15 20:43",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -258,11 +85,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "专家学者汇聚银川 共商贺兰山东麓葡萄酒科创转型之路",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714029.shtml",
+      "title": "江淮运河航运枢纽能力实现重大升级",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715271.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:46:12 +0800",
-      "publishedAtText": "10-13 21:46",
+      "publishedAt": "Thu, 15 Oct 2026 20:39:54 +0800",
+      "publishedAtText": "10-15 20:39",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -274,11 +101,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "《贺兰山倡议》在银川发布 六大维度共促全球葡萄酒产业协同发展",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714027.shtml",
+      "title": "“并购六条”实施两周年：沪市主板重组不断“进化”",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715269.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:46:04 +0800",
-      "publishedAtText": "10-13 21:46",
+      "publishedAt": "Thu, 15 Oct 2026 20:39:50 +0800",
+      "publishedAtText": "10-15 20:39",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -290,11 +117,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "广西推进一体化电视安装部署 破解电视 “双遥控器”难题",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714026.shtml",
+      "title": "海南澄迈跨境电商成型起势",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715266.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:46:02 +0800",
-      "publishedAtText": "10-13 21:46",
+      "publishedAt": "Thu, 15 Oct 2026 20:39:42 +0800",
+      "publishedAtText": "10-15 20:39",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -306,11 +133,187 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "青海枸杞鲜果首次实现空运出口",
-      "url": "https://www.chinanews.com.cn/cj/2026/10-13/10714009.shtml",
+      "title": "秋糖会三度落子南京：面对年轻市场 酒企集体“微醺就好”",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715262.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Tue, 13 Oct 2026 21:35:34 +0800",
-      "publishedAtText": "10-13 21:35",
+      "publishedAt": "Thu, 15 Oct 2026 20:31:02 +0800",
+      "publishedAtText": "10-15 20:31",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "2026东湖论坛在武汉开幕",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715257.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 20:30:22 +0800",
+      "publishedAtText": "10-15 20:30",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "从流花到琶洲：“老广交”眼中的七十年之变",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715254.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 20:09:07 +0800",
+      "publishedAtText": "10-15 20:09",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "覆盖1000余个场景 工信部发布人工智能“产业导航图”",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715252.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:55:12 +0800",
+      "publishedAtText": "10-15 19:55",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "超400家企业集聚海南澄迈深耕“出海”",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715237.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:49:12 +0800",
+      "publishedAtText": "10-15 19:49",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "青海“十五五”构建高原城乡建设高质量发展新格局",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715236.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:49:04 +0800",
+      "publishedAtText": "10-15 19:49",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "新疆吉木萨尔县重点产业招商签约逾66亿元",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715235.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:42:13 +0800",
+      "publishedAtText": "10-15 19:42",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "稳增长强产业 海南擦亮“投资自贸港”品牌",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715233.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:42:09 +0800",
+      "publishedAtText": "10-15 19:42",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "大湾区空铁联运再扩容 城际接驳服务落地深圳宝安机场",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715232.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:42:07 +0800",
+      "publishedAtText": "10-15 19:42",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "中国新疆与中亚国家职业资格互认签约落地",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715228.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:39:05 +0800",
+      "publishedAtText": "10-15 19:39",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "海口联通马来西亚航点增至四城",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715214.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:30:41 +0800",
+      "publishedAtText": "10-15 19:30",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "拼招商 海南澄迈向“兴产”“提质”跨越",
+      "url": "https://www.chinanews.com.cn/cj/2026/10-15/10715209.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 15 Oct 2026 19:27:28 +0800",
+      "publishedAtText": "10-15 19:27",
       "impactTags": [
         "全A风险偏好"
       ],
