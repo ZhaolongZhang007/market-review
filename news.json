@@ -1,12 +1,28 @@
 {
-  "updatedAt": "2026-11-26T02:50:19.491328+08:00",
+  "updatedAt": "2026-11-27T02:38:11.698902+08:00",
   "items": [
     {
-      "title": "中外旅行商携手开发内蒙古冰雪旅游市场",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737841.shtml",
+      "title": "四大商业银行已与上市公司签订股票回购增持贷款合同超6000亿元",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738467.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 22:14:37 +0800",
-      "publishedAtText": "11-25 22:14",
+      "publishedAt": "Thu, 26 Nov 2026 22:37:09 +0800",
+      "publishedAtText": "11-26 22:37",
+      "impactTags": [
+        "银行"
+      ],
+      "impactedStocks": [
+        "招商银行",
+        "工商银行",
+        "农业银行"
+      ],
+      "impactNote": "可能影响：招商银行、工商银行、农业银行"
+    },
+    {
+      "title": "报告指今年中国3D打印产业规模料达约860亿元",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738463.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 26 Nov 2026 22:04:19 +0800",
+      "publishedAtText": "11-26 22:04",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -18,11 +34,27 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "海内外客商齐聚哈尔滨共拓入境文旅合作通道",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737840.shtml",
+      "title": "北京获批医用手术机器人注册证数量居全国首位",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738462.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 22:13:53 +0800",
-      "publishedAtText": "11-25 22:13",
+      "publishedAt": "Thu, 26 Nov 2026 22:02:09 +0800",
+      "publishedAtText": "11-26 22:02",
+      "impactTags": [
+        "机器人"
+      ],
+      "impactedStocks": [
+        "雷赛智能",
+        "大洋电机",
+        "埃斯顿"
+      ],
+      "impactNote": "可能影响：雷赛智能、大洋电机、埃斯顿"
+    },
+    {
+      "title": "黑龙江省工商联十二届八次常委会议召开",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738459.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 26 Nov 2026 21:59:51 +0800",
+      "publishedAtText": "11-26 21:59",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -34,43 +66,27 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "浙西山地间，油茶产业“长出新枝”",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737838.shtml",
+      "title": "北京支持创新医药发展 医企合作持续深化",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738448.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 22:02:24 +0800",
-      "publishedAtText": "11-25 22:02",
+      "publishedAt": "Thu, 26 Nov 2026 21:56:06 +0800",
+      "publishedAtText": "11-26 21:56",
       "impactTags": [
-        "全A风险偏好"
+        "医药"
       ],
       "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
+        "恒瑞医药",
+        "药明康德",
+        "迈瑞医疗"
       ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+      "impactNote": "可能影响：恒瑞医药、药明康德、迈瑞医疗"
     },
     {
-      "title": "专家学者齐聚广州共探人工智能与硬科技产业协同",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737820.shtml",
+      "title": "京津冀首个卫星AIT共享中心投运 雄安可“共享”造星",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738458.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:45:07 +0800",
-      "publishedAtText": "11-25 21:45",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "中马青年企业家广西南宁共探AI赋能企业出海",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737819.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:44:57 +0800",
-      "publishedAtText": "11-25 21:44",
+      "publishedAt": "Thu, 26 Nov 2026 21:54:36 +0800",
+      "publishedAtText": "11-26 21:54",
       "impactTags": [
         "AI"
       ],
@@ -83,11 +99,11 @@
       "impactNote": "可能影响：工业富联、中际旭创、新易盛、寒武纪"
     },
     {
-      "title": "黑龙江“吸睛”各国客商 共拓入境文旅合作通道",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737814.shtml",
+      "title": "用电量背后的产业升级逻辑（经济时评）",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738445.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:43:51 +0800",
-      "publishedAtText": "11-25 21:43",
+      "publishedAt": "Thu, 26 Nov 2026 21:40:06 +0800",
+      "publishedAtText": "11-26 21:40",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -99,11 +115,75 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "小鹏人形机器人IRON预计2027年1月进入硬件量产阶段",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737811.shtml",
+      "title": "三亚聚力打造国内国际双循环重要交汇节点",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738441.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:32:35 +0800",
-      "publishedAtText": "11-25 21:32",
+      "publishedAt": "Thu, 26 Nov 2026 21:28:47 +0800",
+      "publishedAtText": "11-26 21:28",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "中国与亚行合作40周年庆暨高层论坛在北京举行",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738432.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 26 Nov 2026 21:28:29 +0800",
+      "publishedAtText": "11-26 21:28",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "第二十八届高交会开幕 5000余家科创主体参展",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738433.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 26 Nov 2026 21:27:31 +0800",
+      "publishedAtText": "11-26 21:27",
+      "impactTags": [
+        "全A风险偏好"
+      ],
+      "impactedStocks": [
+        "沪深300ETF",
+        "创业板ETF",
+        "券商ETF"
+      ],
+      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
+    },
+    {
+      "title": "共建“一带一路”国家新能源累计装机容量十年内翻两番",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738431.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 26 Nov 2026 21:26:51 +0800",
+      "publishedAtText": "11-26 21:26",
+      "impactTags": [
+        "新能源"
+      ],
+      "impactedStocks": [
+        "宁德时代",
+        "阳光电源",
+        "比亚迪"
+      ],
+      "impactNote": "可能影响：宁德时代、阳光电源、比亚迪"
+    },
+    {
+      "title": "深圳市机器人开放创新中心揭牌",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738420.shtml",
+      "source": "中新网财经新闻",
+      "publishedAt": "Thu, 26 Nov 2026 21:26:45 +0800",
+      "publishedAtText": "11-26 21:26",
       "impactTags": [
         "机器人"
       ],
@@ -115,11 +195,11 @@
       "impactNote": "可能影响：雷赛智能、大洋电机、埃斯顿"
     },
     {
-      "title": "广东发布综合运输服务发展“十五五”规划",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737805.shtml",
+      "title": "麦肯锡发布新书：很难有市场能复制中国的供应链、产业集群和创新能力",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738418.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:30:14 +0800",
-      "publishedAtText": "11-25 21:30",
+      "publishedAt": "Thu, 26 Nov 2026 21:25:21 +0800",
+      "publishedAtText": "11-26 21:25",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -131,27 +211,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "专家：感知能力是机器人进入人类生活关键一步",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737801.shtml",
+      "title": "第十四届“东升杯”国际创业大赛全球总决赛在京举行",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738414.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:27:18 +0800",
-      "publishedAtText": "11-25 21:27",
-      "impactTags": [
-        "机器人"
-      ],
-      "impactedStocks": [
-        "雷赛智能",
-        "大洋电机",
-        "埃斯顿"
-      ],
-      "impactNote": "可能影响：雷赛智能、大洋电机、埃斯顿"
-    },
-    {
-      "title": "量子技术“慧眼”智能体在杭州发布 冀降低早期项目识别门槛",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737795.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:20:56 +0800",
-      "publishedAtText": "11-25 21:20",
+      "publishedAt": "Thu, 26 Nov 2026 21:18:38 +0800",
+      "publishedAtText": "11-26 21:18",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -163,11 +227,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "向“深”向“新” 两项全国创新大赛总决赛在杭启幕",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737794.shtml",
+      "title": "上海将促进专利产业化与国际化落地",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738404.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:16:40 +0800",
-      "publishedAtText": "11-25 21:16",
+      "publishedAt": "Thu, 26 Nov 2026 21:08:44 +0800",
+      "publishedAtText": "11-26 21:08",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -179,11 +243,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "财政部等五部门印发《常态化帮扶资金绩效评价办法》",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737799.shtml",
+      "title": "粤港澳大湾区首批用水器具水效标准亮相鹏城",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738408.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 21:06:07 +0800",
-      "publishedAtText": "11-25 21:06",
+      "publishedAt": "Thu, 26 Nov 2026 21:07:26 +0800",
+      "publishedAtText": "11-26 21:07",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -195,11 +259,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "海南高质量发展“第三极”的新图景：探路开放、航运扩容、产业向新",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737777.shtml",
+      "title": "聚焦规模化量产与产业生态共建：2026增材制造大会在泸州开幕",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738374.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:35:07 +0800",
-      "publishedAtText": "11-25 20:35",
+      "publishedAt": "Thu, 26 Nov 2026 21:01:01 +0800",
+      "publishedAtText": "11-26 21:01",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -211,11 +275,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "杭州发布颠覆性技术及OPC创新应用场景清单",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737774.shtml",
+      "title": "百事集团投资3.1亿元启动山东生产基地二期项目 持续加码中国市场 以数智化升级赋能食品制造高质量发展",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738391.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:31:07 +0800",
-      "publishedAtText": "11-25 20:31",
+      "publishedAt": "Thu, 26 Nov 2026 20:41:06 +0800",
+      "publishedAtText": "11-26 20:41",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -227,11 +291,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "第二届全球技术创新大赛两大专题赛在杭州收官",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737770.shtml",
+      "title": "中国税务部门提升纳税人缴费人合规遵从度",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738366.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:27:45 +0800",
-      "publishedAtText": "11-25 20:27",
+      "publishedAt": "Thu, 26 Nov 2026 20:23:27 +0800",
+      "publishedAtText": "11-26 20:23",
       "impactTags": [
         "全A风险偏好"
       ],
@@ -243,75 +307,11 @@
       "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
     },
     {
-      "title": "重庆出台新规强化农民工工资支付保障",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737772.shtml",
+      "title": "丽香铁路开通运营三年发送旅客1100余万人次",
+      "url": "https://www.chinanews.com.cn/cj/2026/11-26/10738343.shtml",
       "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:24:47 +0800",
-      "publishedAtText": "11-25 20:24",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "2026中国饭店业高质量大会在三亚开幕",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737768.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:23:09 +0800",
-      "publishedAtText": "11-25 20:23",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "四川先进材料产业持续壮大 今年上半年营收超3838亿元",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737767.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:21:25 +0800",
-      "publishedAtText": "11-25 20:21",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "2026中国（北京）数字金融论坛举办 助力构建产业协同新范式",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737765.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:20:37 +0800",
-      "publishedAtText": "11-25 20:20",
-      "impactTags": [
-        "全A风险偏好"
-      ],
-      "impactedStocks": [
-        "沪深300ETF",
-        "创业板ETF",
-        "券商ETF"
-      ],
-      "impactNote": "可能影响：沪深300ETF、创业板ETF、券商ETF"
-    },
-    {
-      "title": "燕山石化：奋力书写“二次创业”高分答卷",
-      "url": "https://www.chinanews.com.cn/cj/2026/11-25/10737752.shtml",
-      "source": "中新网财经新闻",
-      "publishedAt": "Wed, 25 Nov 2026 20:06:58 +0800",
-      "publishedAtText": "11-25 20:06",
+      "publishedAt": "Thu, 26 Nov 2026 20:10:47 +0800",
+      "publishedAtText": "11-26 20:10",
       "impactTags": [
         "全A风险偏好"
       ],
